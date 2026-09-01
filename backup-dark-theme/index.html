@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ============ SEO ============ -->
+  <title>Sajid Islam — AI Engineer & Agentic AI Developer</title>
+  <meta name="description" content="Sajid Islam — Computer Science student, AI & Agentic AI engineer, backend developer, and future startup founder building AI systems that solve meaningful real-world problems." />
+  <meta name="author" content="Sajid Islam" />
+  <meta name="theme-color" content="#05060a" />
+  <meta name="keywords" content="Sajid Islam, AI Engineer, Agentic AI, Machine Learning, Backend Engineer, Portfolio" />
+
+  <!-- Open Graph / social -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Sajid Islam — AI Engineer & Agentic AI Developer" />
+  <meta property="og:description" content="An award-style interactive portfolio: a mind coming online." />
+  <meta property="og:image" content="assets/images/og-cover.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml" />
+
+  <!-- Fonts (progressive; system fallback if offline) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ============ BOOT / PRELOADER ============ -->
+  <div class="boot" id="boot" aria-hidden="true">
+    <div class="boot__inner">
+      <div class="boot__ring"></div>
+      <p class="boot__log" id="bootLog">initializing consciousness</p>
+      <div class="boot__bar"><span id="bootBar"></span></div>
+    </div>
+  </div>
+
+  <!-- ============ CUSTOM CURSOR ============ -->
+  <div class="cursor" id="cursorDot" aria-hidden="true"></div>
+  <div class="cursor cursor--ring" id="cursorRing" aria-hidden="true"></div>
+
+  <!-- ============ SCROLL PROGRESS ============ -->
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+  <!-- ============ NEURAL BACKGROUND ============ -->
+  <canvas class="bg-canvas" id="bgCanvas" aria-hidden="true"></canvas>
+  <div class="bg-aurora" aria-hidden="true"></div>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav" id="nav">
+    <a href="#hero" class="nav__brand" data-magnetic>
+      <span class="nav__brand-dot"></span> SYNAPSE
+    </a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="#about" data-magnetic>Origin</a>
+      <a href="#skills" data-magnetic>Ecosystem</a>
+      <a href="#projects" data-magnetic>Memory</a>
+      <a href="#contact" data-magnetic class="nav__cta">Open Channel</a>
+    </nav>
+    <button class="nav__burger" id="burger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span>
+    </button>
+  </header>
+
+  <main id="main">
+
+    <!-- ============ HERO — NEURAL CORE ============ -->
+    <section class="hero" id="hero">
+      <div class="hero__core" id="heroCore" aria-hidden="true">
+        <div class="hero__core-ring r1"></div>
+        <div class="hero__core-ring r2"></div>
+        <div class="hero__core-ring r3"></div>
+        <div class="hero__core-orb"></div>
+      </div>
+      <div class="hero__content">
+        <p class="eyebrow reveal">SYSTEM ONLINE · v2.0</p>
+        <h1 class="hero__title">
+          <span class="line reveal">I build minds</span>
+          <span class="line reveal">for machines.</span>
+        </h1>
+        <p class="hero__sub reveal">
+          I'm <strong>Sajid Islam</strong> — AI &amp; Agentic AI engineer, backend developer,
+          and future founder. My mission: build AI systems that solve
+          <em>meaningful</em> real-world problems.
+        </p>
+        <div class="hero__roles" id="heroRoles" aria-live="polite"></div>
+        <div class="hero__actions reveal">
+          <a href="#projects" class="btn btn--primary" data-magnetic>Explore my mind</a>
+          <a href="#contact" class="btn btn--ghost" data-magnetic>Open a channel</a>
+        </div>
+      </div>
+      <a href="#about" class="hero__scroll" aria-label="Scroll down">
+        <span></span> scroll to awaken
+      </a>
+    </section>
+
+    <!-- ============ ABOUT — SYNAPTIC JOURNEY ============ -->
+    <section class="about" id="about">
+      <div class="section-head reveal">
+        <span class="section-index">01</span>
+        <h2>The signal path</h2>
+        <p>Every mind has an origin story. Follow the pulse through mine.</p>
+      </div>
+
+      <ol class="journey" id="journey">
+        <li class="journey__node reveal" data-year="Chapter 01">
+          <div class="journey__dot"></div>
+          <div class="journey__card glass">
+            <h3>The Student</h3>
+            <p>A Computer Science student wired with curiosity — decoding
+            algorithms, systems, and the mathematics of intelligence.</p>
+          </div>
+        </li>
+        <li class="journey__node reveal" data-year="Chapter 02">
+          <div class="journey__dot"></div>
+          <div class="journey__card glass">
+            <h3>The ML Enthusiast</h3>
+            <p>Fell for machine learning — training models, chasing signal
+            through noise, turning data into understanding.</p>
+          </div>
+        </li>
+        <li class="journey__node reveal" data-year="Chapter 03">
+          <div class="journey__dot"></div>
+          <div class="journey__card glass">
+            <h3>The AI Engineer</h3>
+            <p>Engineering intelligent systems end-to-end — from robust
+            backends to agentic AI that can reason, plan, and act.</p>
+          </div>
+        </li>
+        <li class="journey__node reveal" data-year="Chapter 04">
+          <div class="journey__dot"></div>
+          <div class="journey__card glass">
+            <h3>The Future Founder</h3>
+            <p>Building toward a startup that ships AI solving real,
+            meaningful problems for real people.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ============ SKILLS — TECHNOLOGY ECOSYSTEM ============ -->
+    <section class="skills" id="skills">
+      <div class="section-head reveal">
+        <span class="section-index">02</span>
+        <h2>The ecosystem</h2>
+        <p>Not bars — a living constellation. Hover a node to trace its synapses.</p>
+      </div>
+      <div class="skills__stage">
+        <canvas id="skillsCanvas" aria-hidden="true"></canvas>
+        <ul class="skills__nodes" id="skillNodes" aria-label="Skills"></ul>
+      </div>
+    </section>
+
+    <!-- ============ PROJECTS — MEMORY CORES ============ -->
+    <section class="projects" id="projects">
+      <div class="section-head reveal">
+        <span class="section-index">03</span>
+        <h2>Memory cores</h2>
+        <p>Fragments of what I've built. Tilt them. Open them.</p>
+      </div>
+      <div class="projects__grid" id="projectGrid"></div>
+    </section>
+
+    <!-- ============ CONTACT — OPEN CHANNEL ============ -->
+    <section class="contact" id="contact">
+      <div class="section-head reveal">
+        <span class="section-index">04</span>
+        <h2>Open a channel</h2>
+        <p>You're not filling a form. You're talking to a system.</p>
+      </div>
+      <div class="terminal glass reveal" id="terminal">
+        <div class="terminal__bar">
+          <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+          <p>synapse@sajid — secure channel</p>
+        </div>
+        <div class="terminal__body" id="termBody" role="log" aria-live="polite"></div>
+        <form class="terminal__input" id="termForm">
+          <span class="terminal__prompt">&gt;</span>
+          <label class="visually-hidden" for="termField">Message input</label>
+          <input id="termField" autocomplete="off" placeholder="type a command… (try: help)" />
+        </form>
+      </div>
+      <!-- Primary actions -->
+      <div class="contact__actions reveal">
+        <!-- TODO: replace with your real address -->
+        <a href="mailto:hello@sajidislam.dev" class="btn btn--primary" data-magnetic>
+          <svg class="btn__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 5.5A2.5 2.5 0 014.5 3h15A2.5 2.5 0 0122 5.5v13a2.5 2.5 0 01-2.5 2.5h-15A2.5 2.5 0 012 18.5v-13zm2.2-.5l7.8 6.1L19.8 5H4.2z"/></svg>
+          Email me
+        </a>
+        <a href="assets/resume/Sajid_Islam_Resume.pdf" class="btn btn--solid" data-magnetic download>
+          <svg class="btn__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v10.6l3.3-3.3 1.4 1.4L11 17.4 5.3 11.7l1.4-1.4L10 13.6V3h2zM4 19h16v2H4v-2z"/></svg>
+          Download résumé
+        </a>
+      </div>
+
+      <!-- Elsewhere -->
+      <div class="channels reveal">
+
+        <section class="channels__group">
+          <h3 class="channels__label">Code</h3>
+          <a class="channel" href="https://github.com/Sajid0875" target="_blank" rel="noopener">
+            <svg class="channel__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+            <span class="channel__text">
+              <span class="channel__name">GitHub</span>
+              <span class="channel__handle">@Sajid0875</span>
+            </span>
+            <svg class="channel__arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg>
+          </a>
+        </section>
+
+        <section class="channels__group">
+          <h3 class="channels__label">Writing</h3>
+          <a class="channel" href="https://medium.com/@sajidislam0875" target="_blank" rel="noopener">
+            <svg class="channel__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/></svg>
+            <span class="channel__text">
+              <span class="channel__name">Medium</span>
+              <span class="channel__handle">@sajidislam0875</span>
+            </span>
+            <svg class="channel__arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg>
+          </a>
+          <a class="channel" href="https://hashnode.com/@sajid0875" target="_blank" rel="noopener">
+            <svg class="channel__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M22.351 8.019l-6.37-6.37a5.63 5.63 0 00-7.962 0l-6.37 6.37a5.63 5.63 0 000 7.962l6.37 6.37a5.63 5.63 0 007.962 0l6.37-6.37a5.63 5.63 0 000-7.962zM12 15.953a3.953 3.953 0 110-7.906 3.953 3.953 0 010 7.906z"/></svg>
+            <span class="channel__text">
+              <span class="channel__name">Hashnode</span>
+              <span class="channel__handle">@sajid0875</span>
+            </span>
+            <svg class="channel__arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg>
+          </a>
+          <a class="channel" href="https://dev.to/sajid0875" target="_blank" rel="noopener">
+            <svg class="channel__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.42 10.05c-.18-.16-.46-.23-.84-.23H6l.02 2.44.04 2.45.56-.02c.41 0 .63-.07.83-.26.24-.24.26-.36.26-2.2 0-1.91-.02-1.96-.29-2.18zM0 4.94v14.12h24V4.94H0zM8.56 15.3c-.44.58-1.06.77-2.53.77H4.71V8.53h1.4c1.67 0 2.16.18 2.6.9.27.43.29.6.32 2.57.05 2.23-.02 2.73-.47 3.3zm5.09-5.47h-2.47v1.77h1.52v1.28l-.72.04-.75.03v1.77l1.22.03 1.2.04v1.28h-1.6c-1.53 0-1.6-.01-1.87-.3l-.3-.28v-3.16c0-3.02.01-3.18.25-3.48.23-.31.25-.31 1.88-.31h1.64v1.3zm4.68 5.45c-.17.43-.64.79-1 .79-.18 0-.45-.15-.67-.39-.32-.32-.45-.63-.82-2.08l-.9-3.39-.45-1.67h.76c.4 0 .75.02.75.05 0 .06 1.16 4.54 1.26 4.83.04.15.32-.7.73-2.3l.66-2.52.74-.04c.4-.02.73 0 .73.04 0 .14-1.67 6.38-1.8 6.68z"/></svg>
+            <span class="channel__text">
+              <span class="channel__name">DEV</span>
+              <span class="channel__handle">@sajid0875</span>
+            </span>
+            <svg class="channel__arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg>
+          </a>
+        </section>
+
+        <section class="channels__group">
+          <h3 class="channels__label">Network</h3>
+          <a class="channel" href="https://www.linkedin.com/in/sajid-islam0875/" target="_blank" rel="noopener">
+            <svg class="channel__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            <span class="channel__text">
+              <span class="channel__name">LinkedIn</span>
+              <span class="channel__handle">sajid-islam0875</span>
+            </span>
+            <svg class="channel__arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg>
+          </a>
+        </section>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© <span id="year"></span> Sajid Islam · Built as a mind, not a page.</p>
+    <p class="footer__status"><span class="pulse"></span> All systems nominal</p>
+  </footer>
+
+  <!-- Project detail modal -->
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal__panel glass" id="modalPanel">
+      <button class="modal__close" id="modalClose" aria-label="Close">&times;</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <script src="js/script.js" defer></script>
+</body>
+</html>

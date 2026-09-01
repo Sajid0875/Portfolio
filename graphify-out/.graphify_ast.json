@@ -1,0 +1,181 @@
+{
+  "nodes": [
+    {
+      "id": "js_script",
+      "label": "script.js",
+      "file_type": "code",
+      "source_file": "js/script.js",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "js_script_resize",
+      "label": "resize()",
+      "file_type": "code",
+      "source_file": "js/script.js",
+      "source_location": "L97",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "js_script_build",
+      "label": "build()",
+      "file_type": "code",
+      "source_file": "js/script.js",
+      "source_location": "L105",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "js_script_draw",
+      "label": "draw()",
+      "file_type": "code",
+      "source_file": "js/script.js",
+      "source_location": "L116",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "js_script_pos",
+      "label": "pos()",
+      "file_type": "code",
+      "source_file": "js/script.js",
+      "source_location": "L227",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "js_script_drawlines",
+      "label": "drawLines()",
+      "file_type": "code",
+      "source_file": "js/script.js",
+      "source_location": "L228",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "js_script_openmodal",
+      "label": "openModal()",
+      "file_type": "code",
+      "source_file": "js/script.js",
+      "source_location": "L288",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "js_script_close",
+      "label": "close()",
+      "file_type": "code",
+      "source_file": "js/script.js",
+      "source_location": "L297",
+      "_callable": true,
+      "_origin": "ast"
+    }
+  ],
+  "edges": [
+    {
+      "source": "js_script",
+      "target": "js_script_resize",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "js/script.js",
+      "source_location": "L97",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "js_script",
+      "target": "js_script_build",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "js/script.js",
+      "source_location": "L105",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "js_script",
+      "target": "js_script_draw",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "js/script.js",
+      "source_location": "L116",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "js_script",
+      "target": "js_script_resize",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "js/script.js",
+      "source_location": "L222",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "js_script",
+      "target": "js_script_pos",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "js/script.js",
+      "source_location": "L227",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "js_script",
+      "target": "js_script_drawlines",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "js/script.js",
+      "source_location": "L228",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "js_script",
+      "target": "js_script_openmodal",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "js/script.js",
+      "source_location": "L288",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "js_script",
+      "target": "js_script_close",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "js/script.js",
+      "source_location": "L297",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "js_script_resize",
+      "target": "js_script_build",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "js/script.js",
+      "source_location": "L103",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "js_script_drawlines",
+      "target": "js_script_pos",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "js/script.js",
+      "source_location": "L230",
+      "weight": 1.0,
+      "_origin": "ast"
+    }
+  ],
+  "input_tokens": 0,
+  "output_tokens": 0
+}
