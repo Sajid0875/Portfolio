@@ -1,0 +1,75 @@
+# Sajid Islam
+
+> Computer Science undergraduate at FAST NUCES, Pakistan, and an AI engineer building
+> generative and agentic AI systems — LLM-orchestrated RAG pipelines, tool-using agents,
+> and the Python backends behind them. Canonical site: https://sajiddev.systems/
+
+- **Name:** Sajid Islam
+- **Role:** AI Engineering Undergraduate — Generative AI, Agentic Systems & LLM Applications
+- **Location:** Peshawar, Pakistan
+- **Education:** BS Computer Science, FAST National University of Computing and Emerging
+  Sciences (NUCES), Pakistan — Aug 2024 to expected May 2028
+- **Open to:** AI/ML engineering, agentic AI, LLM application, and backend roles and internships
+- **Contact:** sajidislam0875@gmail.com
+
+## Skills
+
+- **AI, LLM & Agents:** LangChain, OpenAI API, Anthropic API, LLM orchestration, prompt
+  engineering, AI agents, RAG pipelines, vector databases (FAISS, Chroma), context-window
+  management, episodic memory, n8n AI agent workflows, multi-step reasoning, REST API integration
+- **ML & Data Science:** Python, Pandas, NumPy, Scikit-learn, TensorFlow, Keras, OpenCV, CNNs,
+  recommendation systems, personalization
+- **Backend, Deployment & Cloud:** PostgreSQL, MySQL, MongoDB, SQL, FastAPI (familiar),
+  ETL pipelines, cloud platform basics (GCP/AWS)
+- **Languages & Core CS:** Python, C++, Java, PHP, JavaScript, HTML/CSS; data structures and
+  algorithms, OOP, design patterns, operating systems, system design
+- **MLOps:** Git, DVC, MLflow, Docker
+
+## Projects
+
+- [WhatsApp Commerce Copilot](https://github.com/comebck-pakistan/cohort-1-squad-margalla/tree/main/whatsapp-commerce-copilot):
+  Agentic AI copilot for Pakistani clothing-brand owners that reads customer questions in Urdu
+  and Roman Urdu across WhatsApp and Instagram DMs and replies with catalog-grounded answers on
+  sizing, delivery, and Cash-on-Delivery confirmation. Built in a 4-person squad during Comebck
+  Pakistan Cohort 1 (8-week, YC-style accelerator); selected Top 5 of the cohort.
+  Tech: Agentic AI, LLM integration, React, FastAPI, LangChain, Redis, Docker.
+- [Entropy-Aware Data Preservation System](https://github.com/Sajid0875/adaptive-data-preservation):
+  Production-style PostgreSQL ETL pipeline that computes Shannon entropy via automated triggers
+  and routes records through rule-based preservation logic across a normalized (3NF) 10+ table
+  schema, with a real-time PHP dashboard for entropy trends and audit logs.
+  Tech: PostgreSQL, Python, PHP, Bootstrap, Shell.
+- [Agentic Systems Bootcamp](https://github.com/Sajid0875/agentic-systems-bootcamp):
+  Open-source curriculum on production AI agent architectures — LLM orchestration, multi-step
+  reasoning, tool use, memory management, and RAG pipeline design. Implemented episodic memory
+  using vector databases (FAISS/Chroma) with compressed summary buffers for long-horizon agents.
+  Tech: Python, LangChain, OpenAI API, Anthropic API, RAG, vector databases.
+- n8n AI Agent Workflow Automation: End-to-end AI agent workflows in n8n integrating LLMs with
+  external APIs, webhooks, and data sources, using conditional branching, retry logic, and
+  structured output parsing. Tech: n8n, REST APIs, Python, LLM integrations.
+
+## Experience
+
+- **Data / IT Intern — Inter-Services Public Relations (ISPR), Pakistan Army** (Jan–Feb 2026),
+  Media & Communications Wing, Peshawar. Managed data pipelines and IT operations in a
+  large-scale organization, coordinating cross-functional digital workflows.
+
+## Training
+
+- **GIKI × Skylabs Advanced AI Bootcamp (2026):** two-month intensive covering classical ML,
+  deep learning and NLP, agentic AI (LangChain, RAG), and MLOps tooling (Git, DVC, MLflow).
+
+## Volunteering
+
+- AI education workshops with Ranraa Children Foundation and FAST CSS — hands-on AI/LLM
+  sessions on practical AI tools for underprivileged children in Peshawar (2025–2026).
+
+## Links
+
+- [Portfolio](https://sajiddev.systems/)
+- [GitHub](https://github.com/Sajid0875)
+- [LinkedIn](https://www.linkedin.com/in/sajid-islam0875/)
+- [Résumé (PDF)](https://sajiddev.systems/assets/resume/Sajid_Islam_Resume.pdf)
+- [Kaggle](https://www.kaggle.com/sajid75)
+- [Medium](https://medium.com/@sajidislam0875)
+- [Hashnode](https://hashnode.com/@sajid0875)
+- [DEV](https://dev.to/sajid0875)

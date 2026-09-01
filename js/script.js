@@ -66,20 +66,47 @@ const $$ = (s, ctx = document) => [...ctx.querySelectorAll(s)];
 })();
 
 /* ---------------------------------------------------------------
-   6) REVEAL ON SCROLL — IntersectionObserver
+   6) REVEAL ON SCROLL
+   A plain scroll sweep rather than IntersectionObserver: content that fails to
+   reveal is invisible content, so this trades a little efficiency for a path
+   that cannot silently leave a section blank. rAF-throttled, the pending list
+   shrinks as it goes, and the listeners detach once everything is shown.
    --------------------------------------------------------------- */
 (function reveals() {
-  const els = $$('.reveal');
-  if (prefersReduced || !('IntersectionObserver' in window)) { els.forEach((e) => e.classList.add('in')); return; }
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach((en, k) => {
-      if (en.isIntersecting) {
-        setTimeout(() => en.target.classList.add('in'), k * 60);
-        io.unobserve(en.target);
+  let pending = $$('.reveal');
+  if (!pending.length) return;
+  if (prefersReduced) { pending.forEach((e) => e.classList.add('in')); return; }
+
+  const sweep = () => {
+    let shown = 0;
+    pending = pending.filter((el) => {
+      const r = el.getBoundingClientRect();
+      // Trigger a little before the element is fully on screen.
+      if (r.top < window.innerHeight * 0.92 && r.bottom > 0) {
+        setTimeout(() => el.classList.add('in'), shown++ * 60);
+        return false;
       }
+      return true;
     });
-  }, { threshold: 0.15 });
-  els.forEach((e) => io.observe(e));
+    if (!pending.length) {
+      window.removeEventListener('scroll', onScroll, { capture: true });
+      window.removeEventListener('resize', onScroll);
+    }
+  };
+
+  let ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => { ticking = false; sweep(); });
+  }
+  // Capture phase: `body` carries overflow-y:auto, so the scroll may originate
+  // on an element rather than the window. Capture sees both.
+  window.addEventListener('scroll', onScroll, { passive: true, capture: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+  sweep();
+  // Late webfont/layout shifts can move elements into view without a scroll.
+  window.addEventListener('load', sweep);
 })();
 
 /* ---------------------------------------------------------------
@@ -89,31 +116,15 @@ const $$ = (s, ctx = document) => [...ctx.querySelectorAll(s)];
   const stage = $('.skills__stage'); const list = $('#skillNodes'); const canvas = $('#skillsCanvas');
   if (!stage || !list || !canvas) return;
   const ctx = canvas.getContext('2d');
-  const data = [
-    { label: 'AI Core', tag: 'core', core: true, x: 50, y: 50 },
-    { label: 'Math Foundations', tag: 'algebra · calculus', x: 50, y: 10 },
-    { label: 'Transformers', tag: 'self-attention', x: 72, y: 18 },
-    { label: 'LLMs', tag: 'GPT · BERT', x: 86, y: 38 },
-    { label: 'Fine-Tuning', tag: 'PEFT', x: 86, y: 62 },
-    { label: 'Alignment', tag: 'RLHF', x: 72, y: 82 },
-    { label: 'Agentic AI', tag: 'ReAct · multi-agent', x: 50, y: 90 },
-    { label: 'RAG', tag: 'agentic RAG', x: 28, y: 82 },
-    { label: 'LLMOps', tag: 'deploy · CI/CD', x: 14, y: 62 },
-    { label: 'Prompt Engineering', tag: 'CoT reasoning', x: 14, y: 38 },
-    { label: 'Python', tag: 'language', x: 28, y: 18 },
-  ];
-  // Build DOM nodes
-  data.forEach((d, i) => {
-    const li = document.createElement('li');
-    // 'hub' (not 'core') — `.core` is the project-card class; sharing it collided
-    li.className = 'skill-node' + (d.core ? ' hub' : '');
-    li.style.left = d.x + '%'; li.style.top = d.y + '%';
-    li.style.setProperty('--dur', (5 + (i % 4)) + 's');
-    li.innerHTML = `${d.label}<small>${d.tag}</small>`;
-    li.dataset.idx = i;
-    list.appendChild(li);
-    d.el = li;
+  // Nodes are authored in the HTML (so crawlers and AI agents can read them as
+  // text); this module only positions them and draws the synapses between.
+  const data = $$('.skill-node', list).map((el, i) => {
+    const x = Number(el.dataset.x), y = Number(el.dataset.y);
+    el.style.left = x + '%'; el.style.top = y + '%';
+    el.style.setProperty('--dur', (5 + (i % 4)) + 's');
+    return { x, y, el };
   });
+  if (!data.length) return;
   function resize() {
     canvas.width = stage.clientWidth * devicePixelRatio;
     canvas.height = stage.clientHeight * devicePixelRatio;
@@ -145,57 +156,38 @@ const $$ = (s, ctx = document) => [...ctx.querySelectorAll(s)];
    --------------------------------------------------------------- */
 (function projects() {
   const grid = $('#projectGrid'); if (!grid) return;
-  const data = [
-    { tag: 'Agentic AI', title: 'WhatsApp Commerce Copilot', desc: 'An AI-powered WhatsApp commerce platform — auto-replies, instant human handoff, and live stock management from a modern dashboard.', long: 'A full commerce copilot for WhatsApp: a React/Vite dashboard talks to a Python/FastAPI backend and the Evolution API gateway to run a store over chat. AI auto-replies (optional LangChain + Gemini) answer catalog questions against store-scoped products, a one-tap Human Mode hands the conversation to a person, and real-time stock edits sync live across the platform. Fully containerised — the whole backend stack (Redis, gateway, database) spins up with a single Docker command.', stack: ['React', 'FastAPI', 'LangChain', 'Redis', 'Docker'], link: 'https://github.com/comebck-pakistan/cohort-1-squad-margalla/tree/main/whatsapp-commerce-copilot' },
-    { tag: 'Data Systems', title: 'Adaptive Data Preservation', desc: 'An entropy-aware DBMS that scores state snapshots and automatically decides whether to discard, compress, preserve, or archive them.', long: 'A "Universe State Compression & Entropy-Aware Data Preservation" system: it tracks state snapshots, records every change, and computes an entropy score per snapshot to drive an automated preservation decision engine — discard, compress, preserve, or archive. Built on PostgreSQL with PL/pgSQL functions, triggers, and views, a PHP 8 backend, and a Chart.js dashboard, plus integrity verification, audit logging, snapshot comparison, and export. Ships with Docker Compose for a one-command PHP + PostgreSQL environment.', stack: ['PHP', 'PostgreSQL', 'PL/pgSQL', 'Chart.js', 'Docker'], link: 'https://github.com/Sajid0875/adaptive-data-preservation' },
-    { tag: 'Completed · 8 Weeks', title: 'GIKI-SkyLabs AI Bootcamp', desc: 'An 8-week intensive taking me from the math of modern AI to deploying autonomous agents — completed end to end.', long: 'An 8-week journey from first principles to production agents: Weeks 1–2 build the mathematical foundations (linear algebra, calculus, probability, information theory, convex optimization) behind attention and training; Weeks 3–4 cover NLP and transformer architectures (self-attention, BERT, GPT) with hands-on fine-tuning, pretraining, and scaling laws; Week 5 goes into post-training and alignment (instruction tuning, RLHF/RLAIF, PEFT, and Chain/Tree/Graph-of-Thought reasoning); Week 6 covers agentic AI (ReAct, tool-using agents, memory, multi-agent orchestration) and advanced RAG; Week 7 is inference and deployment (ML/LLMOps — versioning, CI/CD, serving, observability, cost and security); and Week 8 is a capstone building and deploying an autonomous agent system. Completed the full program end to end, capping it with a capstone autonomous agent system.', stack: ['Python', 'Transformers', 'RLHF', 'Agentic AI', 'LLMOps'] },
-  ];
-  data.forEach((d, i) => {
-    const el = document.createElement('article');
-    el.className = 'core reveal';
-    // Keyboard-operable: the card is the control that opens the detail modal
+  // Cards are authored in the HTML so search engines and AI agents can read the
+  // full project text without running JavaScript. This module only makes them
+  // keyboard-operable and wires each one to the detail modal.
+  $$('.core', grid).forEach((el) => {
+    const title = $('.core__title', el).textContent.trim();
+    const tag = $('.core__tag', el).textContent.trim();
     el.setAttribute('role', 'button');
     el.setAttribute('tabindex', '0');
-    el.setAttribute('aria-label', `${d.title} — ${d.tag}. Open project details`);
-    el.innerHTML = `
-      <span class="core__tag">${d.tag}</span>
-      <h3 class="core__title">${d.title}</h3>
-      <p class="core__desc">${d.desc}</p>
-      <div class="core__stack">${d.stack.map((s) => `<span>${s}</span>`).join('')}</div>
-      <span class="core__open">Access memory →</span>`;
-    grid.appendChild(el);
-
-    el.addEventListener('click', () => openModal(d));
+    el.setAttribute('aria-label', `${title} — ${tag}. Open project details`);
+    el.addEventListener('click', () => openModal(el));
     el.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(d); }
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(el); }
     });
   });
-
-  // The global reveal observer ran before these cards existed, so reveal them here.
-  const cards = $$('.core', grid);
-  if (prefersReduced || !('IntersectionObserver' in window)) {
-    cards.forEach((c) => c.classList.add('in'));
-  } else {
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((en) => {
-        if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
-      });
-    }, { threshold: 0.15 });
-    cards.forEach((c) => io.observe(c));
-  }
 
   // Modal
   const modal = $('#modal'); const panel = $('#modalContent'); const closeBtn = $('#modalClose');
   const FOCUSABLE = 'a[href], button, input, [tabindex]:not([tabindex="-1"])';
   let lastFocused = null;
 
-  function openModal(d) {
+  // Built from the card's own markup, so the modal and the crawlable page
+  // content can never drift apart.
+  function openModal(card) {
+    const long = $('.core__long', card);
+    const repo = card.dataset.repo;
+    const stack = $$('.core__stack span', card).map((s) => s.textContent);
     panel.innerHTML = `
-      <span class="modal__tag">${d.tag}</span>
-      <h3>${d.title}</h3>
-      <p>${d.long}</p>
-      <ul>${d.stack.map((s) => `<li>${s}</li>`).join('')}</ul>
-      ${d.link ? `<a class="btn btn--primary modal__link" href="${d.link}" target="_blank" rel="noopener">View on GitHub →</a>` : ''}`;
+      <span class="modal__tag">${$('.core__tag', card).textContent}</span>
+      <h3>${$('.core__title', card).textContent}</h3>
+      ${long ? long.innerHTML : ''}
+      <ul>${stack.map((s) => `<li>${s}</li>`).join('')}</ul>
+      ${repo ? `<a class="btn btn--primary modal__link" href="${repo}" target="_blank" rel="noopener">View project source on GitHub →</a>` : ''}`;
     lastFocused = document.activeElement;
     modal.classList.add('open'); modal.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
@@ -246,16 +238,19 @@ const $$ = (s, ctx = document) => [...ctx.querySelectorAll(s)];
     medium:   'https://medium.com/@sajidislam0875',
     hashnode: 'https://hashnode.com/@sajid0875',
     devto:    'https://dev.to/sajid0875',
+    kaggle:   'https://www.kaggle.com/sajid75',
   };
   const EMAIL = 'sajidislam0875@gmail.com';
 
   const commands = {
-    help:    'available commands: about · skills · projects · writing · links · github · linkedin · medium · hashnode · devto · contact · email · resume · clear',
-    about:   'Sajid Islam — CS student, AI & agentic-AI engineer, backend developer. Mission: AI that solves meaningful real-world problems.',
-    skills:  'core: math foundations, transformers, LLMs, fine-tuning (PEFT), alignment (RLHF), prompt engineering, agentic AI, RAG, LLMOps, Python.',
-    projects:'WhatsApp Commerce Copilot (agentic AI) · Adaptive Data Preservation (data systems) · Agentic Systems Bootcamp (in progress). Scroll up to open a memory core.',
+    help:    'available commands: about · education · experience · skills · projects · writing · links · github · linkedin · kaggle · medium · hashnode · devto · contact · email · resume · clear',
+    about:   'Sajid Islam — Computer Science undergraduate at FAST NUCES, Pakistan, and an AI engineer building generative and agentic AI systems: LLM agents, RAG pipelines, and Python backends.',
+    education: 'BS Computer Science, FAST National University of Computing and Emerging Sciences (NUCES), Pakistan — Aug 2024 to expected May 2028. Also completed the GIKI × Skylabs Advanced AI Bootcamp (2026).',
+    experience: 'Data / IT Intern at Inter-Services Public Relations (ISPR), Pakistan Army (Jan–Feb 2026), Peshawar — data pipelines and IT operations. Shipped an agentic AI copilot in Comebck Pakistan Cohort 1 (Top 5 of cohort).',
+    skills:  'AI & agents: LangChain, OpenAI & Anthropic APIs, RAG pipelines, vector DBs (FAISS, Chroma), prompt engineering, n8n. ML: Python, Pandas, NumPy, scikit-learn, TensorFlow, Keras, OpenCV. Backend: PostgreSQL, MySQL, MongoDB, FastAPI, ETL. Languages: Python, C++, Java, PHP, JavaScript.',
+    projects:'WhatsApp Commerce Copilot (agentic AI, Top 5 of Comebck Pakistan Cohort 1) · Entropy-Aware Data Preservation System (PostgreSQL ETL) · GIKI × Skylabs Advanced AI Bootcamp (completed). Scroll up to open a memory core.',
     writing: `I write at medium (${LINKS.medium}), hashnode (${LINKS.hashnode}), and dev.to (${LINKS.devto}). type a platform name to open it.`,
-    links:   `github: ${LINKS.github} · linkedin: ${LINKS.linkedin} · medium: ${LINKS.medium} · hashnode: ${LINKS.hashnode} · dev.to: ${LINKS.devto}`,
+    links:   `github: ${LINKS.github} · linkedin: ${LINKS.linkedin} · kaggle: ${LINKS.kaggle} · medium: ${LINKS.medium} · hashnode: ${LINKS.hashnode} · dev.to: ${LINKS.devto}`,
     contact: `email: ${EMAIL} · type "links" for every profile, or use the buttons below.`,
     email:   `opening mail client → ${EMAIL}`,
     resume:  'fetching résumé → assets/resume/Sajid_Islam_Resume.pdf',

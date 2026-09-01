@@ -1,0 +1,12 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Local Claude Code / agent tooling (not part of the site)
+.claude/
+.agents/
+graphify-out/
+skills-lock.json
+
+# Logs
+*.log
