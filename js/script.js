@@ -156,19 +156,19 @@ const $$ = (s, ctx = document) => [...ctx.querySelectorAll(s)];
    --------------------------------------------------------------- */
 (function projects() {
   const grid = $('#projectGrid'); if (!grid) return;
-  // Cards are authored in the HTML so search engines and AI agents can read the
-  // full project text without running JavaScript. This module only makes them
-  // keyboard-operable and wires each one to the detail modal.
+  // Cards are authored in the HTML so search engines and AI agents can read them
+  // without JavaScript, and each card already contains a real <a> or <button>.
+  // This only adds the convenience of clicking anywhere on the card; it never
+  // becomes the sole route to the content.
   $$('.core', grid).forEach((el) => {
-    const title = $('.core__title', el).textContent.trim();
-    const tag = $('.core__tag', el).textContent.trim();
-    el.setAttribute('role', 'button');
-    el.setAttribute('tabindex', '0');
-    el.setAttribute('aria-label', `${title} — ${tag}. Open project details`);
-    el.addEventListener('click', () => openModal(el));
-    el.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(el); }
+    const link = $('a.core__open', el);
+    const btn = $('button.core__open', el);
+    el.addEventListener('click', (e) => {
+      if (e.target.closest('a, button')) return; // let the real control handle it
+      if (link) window.location.href = link.getAttribute('href');
+      else if (btn) openModal(el);
     });
+    if (btn) btn.addEventListener('click', () => openModal(el));
   });
 
   // Modal

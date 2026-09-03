@@ -499,3 +499,74 @@ article.core:hover { border-color: var(--ink); background: var(--paper-3); }
   }
   .reveal { opacity: 1; transform: none; }
 }
+
+/* Hero H1 role line — same treatment as the display line, sized to fit a
+   longer string without changing the hero's visual rhythm. */
+.hero__title .line--role {
+  font-size: clamp(1.5rem, 3.6vw, 2.9rem);
+  letter-spacing: -0.01em;
+}
+
+/* =====================================================================
+   CASE STUDY PAGES  (/projects/*)
+   Reuses the homepage tokens and type scale; no new fonts or libraries.
+   ===================================================================== */
+.case {
+  max-width: 780px; margin-inline: auto;
+  padding: clamp(6.5rem, 14vh, 9rem) clamp(1.25rem, 6vw, 5rem) clamp(4rem, 8vh, 6rem);
+}
+.breadcrumb { margin-bottom: 2rem; }
+.breadcrumb ol { display: flex; flex-wrap: wrap; align-items: center; gap: 0.45rem;
+  font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--graphite); }
+.breadcrumb a { color: var(--graphite); border-bottom: 1px solid transparent; }
+.breadcrumb a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+.breadcrumb li[aria-current] { color: var(--ink); }
+.breadcrumb li + li::before { content: "/"; margin-right: 0.45rem; color: var(--rule-firm); }
+
+.case h1 { font-size: clamp(2.1rem, 5.6vw, 3.4rem); letter-spacing: -0.03em; margin-bottom: 1rem; }
+.case__tag { display: inline-block; font-family: var(--font-mono); font-size: 0.62rem;
+  font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent);
+  margin-bottom: 0.9rem; }
+/* Direct-answer summary — the passage answer engines are most likely to quote */
+.case__answer { font-size: 1.16rem; line-height: 1.6; color: var(--ink);
+  border-left: 2px solid var(--accent); padding: 0.2rem 0 0.2rem 1.1rem; margin-bottom: 2.5rem; }
+.case section { padding: 0; margin: 0 0 2.4rem; max-width: none; }
+.case h2 { font-size: 1.45rem; letter-spacing: -0.02em; margin-bottom: 0.85rem;
+  padding-bottom: 0.6rem; border-bottom: 1px solid var(--rule); }
+.case h3 { font-size: 1.05rem; margin: 1.4rem 0 0.5rem; }
+.case p { color: var(--graphite); margin-bottom: 0.9rem; }
+.case strong { color: var(--ink); font-weight: 500; }
+.case ul { display: flex; flex-direction: column; gap: 0.5rem; margin: 0 0 1rem; }
+.case ul li { position: relative; padding-left: 1.1rem; color: var(--graphite); }
+.case ul li::before { content: ""; position: absolute; left: 0; top: 0.62em;
+  width: 5px; height: 1px; background: var(--rule-firm); }
+.case dl { display: grid; gap: 0.5rem 1.25rem; margin-bottom: 1rem; }
+@media (min-width: 620px) { .case dl { grid-template-columns: 10.5rem 1fr; } }
+.case dt { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--ink); padding-top: 0.2em; }
+.case dd { color: var(--graphite); }
+.stack-list { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.stack-list li { padding: 0.28rem 0.55rem; border: 1px solid var(--rule); border-radius: 2px;
+  background: var(--paper-2); color: var(--graphite);
+  font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.06em; }
+.stack-list li::before { display: none; }
+.stack-list li { padding-left: 0.55rem; }
+.case__actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 2.5rem;
+  padding-top: 1.75rem; border-top: 1px solid var(--rule); }
+.case__next { margin-top: 2.5rem; }
+.case__next a { color: var(--accent); border-bottom: 1px solid var(--accent); }
+
+/* Project cards now navigate via a real link; keep the type styling identical. */
+.core__title a { color: inherit; }
+.core:hover .core__title a { color: var(--accent); }
+a.core__open, button.core__open { display: inline-block; }
+
+/* ---------- In brief — direct answers (AEO) ---------- */
+.qa__list { display: grid; gap: 1px; background: var(--rule);
+  border: 1px solid var(--rule); border-radius: var(--radius-lg); overflow: hidden; }
+.qa__item { background: var(--paper-2); padding: 1.6rem clamp(1.1rem, 3vw, 2rem); }
+.qa__item h3 { font-size: 1.12rem; letter-spacing: -0.015em; margin-bottom: 0.55rem; }
+.qa__item p { color: var(--graphite); max-width: 68ch; }
+.qa__item a { color: var(--accent); border-bottom: 1px solid transparent; }
+.qa__item a:hover { border-bottom-color: var(--accent); }

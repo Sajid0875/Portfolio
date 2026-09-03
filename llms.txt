@@ -1,67 +1,67 @@
 # Sajid Islam
 
 > Computer Science undergraduate at FAST NUCES, Pakistan, and an AI engineer building
-> generative and agentic AI systems — LLM-orchestrated RAG pipelines, tool-using agents,
-> and the Python backends behind them. Canonical site: https://sajiddev.systems/
+> agentic AI systems — LLM-orchestrated retrieval pipelines, tool-using agents, and the
+> Python backends behind them. Canonical site: https://sajiddev.systems/
 
 - **Name:** Sajid Islam
-- **Role:** AI Engineering Undergraduate — Generative AI, Agentic Systems & LLM Applications
+- **Role:** Agentic AI & Python Engineer (AI engineering undergraduate)
 - **Location:** Peshawar, Pakistan
 - **Education:** BS Computer Science, FAST National University of Computing and Emerging
   Sciences (NUCES), Pakistan — Aug 2024 to expected May 2028
-- **Open to:** AI/ML engineering, agentic AI, LLM application, and backend roles and internships
+- **Open to:** AI/ML engineering, agentic AI, LLM application and backend internships and roles
 - **Contact:** sajidislam0875@gmail.com
 
 ## Skills
 
-- **AI, LLM & Agents:** LangChain, OpenAI API, Anthropic API, LLM orchestration, prompt
-  engineering, AI agents, RAG pipelines, vector databases (FAISS, Chroma), context-window
-  management, episodic memory, n8n AI agent workflows, multi-step reasoning, REST API integration
-- **ML & Data Science:** Python, Pandas, NumPy, Scikit-learn, TensorFlow, Keras, OpenCV, CNNs,
-  recommendation systems, personalization
-- **Backend, Deployment & Cloud:** PostgreSQL, MySQL, MongoDB, SQL, FastAPI (familiar),
-  ETL pipelines, cloud platform basics (GCP/AWS)
-- **Languages & Core CS:** Python, C++, Java, PHP, JavaScript, HTML/CSS; data structures and
+- **AI, LLM & agents:** LangChain, OpenAI API, Anthropic API, LLM orchestration, prompt
+  engineering, AI agents, retrieval-augmented generation (RAG), vector databases (FAISS, Chroma),
+  context-window management, multi-step reasoning, REST API integration, n8n (AI agent
+  workflow automation)
+- **ML & data science:** Python, Pandas, NumPy, scikit-learn, TensorFlow, Keras, OpenCV, CNNs
+- **Backend & data:** PostgreSQL, MySQL, MongoDB, SQL, PL/pgSQL, FastAPI, ETL pipelines,
+  cloud platform basics (GCP/AWS)
+- **Languages & core CS:** Python, C++, Java, PHP, JavaScript, HTML/CSS; data structures and
   algorithms, OOP, design patterns, operating systems, system design
 - **MLOps:** Git, DVC, MLflow, Docker
 
 ## Projects
 
-- [WhatsApp Commerce Copilot](https://github.com/comebck-pakistan/cohort-1-squad-margalla/tree/main/whatsapp-commerce-copilot):
-  Agentic AI copilot for Pakistani clothing-brand owners that reads customer questions in Urdu
-  and Roman Urdu across WhatsApp and Instagram DMs and replies with catalog-grounded answers on
-  sizing, delivery, and Cash-on-Delivery confirmation. Built in a 4-person squad during Comebck
-  Pakistan Cohort 1 (8-week, YC-style accelerator); selected Top 5 of the cohort.
-  Tech: Agentic AI, LLM integration, React, FastAPI, LangChain, Redis, Docker.
-- [Entropy-Aware Data Preservation System](https://github.com/Sajid0875/adaptive-data-preservation):
-  Production-style PostgreSQL ETL pipeline that computes Shannon entropy via automated triggers
-  and routes records through rule-based preservation logic across a normalized (3NF) 10+ table
-  schema, with a real-time PHP dashboard for entropy trends and audit logs.
-  Tech: PostgreSQL, Python, PHP, Bootstrap, Shell.
-- [Agentic Systems Bootcamp](https://github.com/Sajid0875/agentic-systems-bootcamp):
-  Open-source curriculum on production AI agent architectures — LLM orchestration, multi-step
-  reasoning, tool use, memory management, and RAG pipeline design. Implemented episodic memory
-  using vector databases (FAISS/Chroma) with compressed summary buffers for long-horizon agents.
-  Tech: Python, LangChain, OpenAI API, Anthropic API, RAG, vector databases.
-- n8n AI Agent Workflow Automation: End-to-end AI agent workflows in n8n integrating LLMs with
-  external APIs, webhooks, and data sources, using conditional branching, retry logic, and
-  structured output parsing. Tech: n8n, REST APIs, Python, LLM integrations.
+- [WhatsApp Commerce Copilot](https://sajiddev.systems/projects/whatsapp-commerce-copilot/):
+  An AI-powered WhatsApp commerce platform — a React dashboard and Python/FastAPI backend behind
+  the Evolution API gateway. AI auto-replies answer catalogue questions using only store-scoped
+  products and policies retrieved by the backend, with a one-click Human Mode handoff to a person
+  and live stock management. Optional LangChain intent chain; the backend keeps working on a
+  deterministic catalogue pipeline when no AI key is present. Built by a four-person squad in
+  Comebck Pakistan Cohort 1 (8-week accelerator); selected Top 5 of the cohort.
+  Tech: Python, FastAPI, React, LangChain, Redis, Docker Compose.
+  Source: https://github.com/comebck-pakistan/cohort-1-squad-margalla/tree/main/whatsapp-commerce-copilot
+
+- [Entropy-Aware Data Preservation System](https://sajiddev.systems/projects/entropy-aware-data-preservation/):
+  A PostgreSQL system that tracks state snapshots, records state changes, computes an entropy score
+  per snapshot with in-database PL/pgSQL functions, and automatically recommends whether each
+  snapshot should be discarded, compressed, preserved or archived. Includes integrity checks, audit
+  logs, snapshot comparison and export through a PHP 8 web interface with Chart.js. 10-table schema,
+  12 triggers, 3 views. A three-person university DBMS project (Sajid Islam, Azwar Khan, Abbas Bajwa).
+  Tech: PostgreSQL, PL/pgSQL, SQL, PHP 8, JavaScript, Chart.js, Docker.
+  Source: https://github.com/Sajid0875/adaptive-data-preservation
+
+## Training
+
+- **GIKI × Skylabs Advanced AI Bootcamp (2026):** a two-month intensive covering classical machine
+  learning, deep learning and NLP, agentic AI (LangChain, RAG), and MLOps tooling (Git, DVC, MLflow).
+  Completed. This is training, not a software project, and has no associated repository.
 
 ## Experience
 
 - **Data / IT Intern — Inter-Services Public Relations (ISPR), Pakistan Army** (Jan–Feb 2026),
-  Media & Communications Wing, Peshawar. Managed data pipelines and IT operations in a
-  large-scale organization, coordinating cross-functional digital workflows.
-
-## Training
-
-- **GIKI × Skylabs Advanced AI Bootcamp (2026):** two-month intensive covering classical ML,
-  deep learning and NLP, agentic AI (LangChain, RAG), and MLOps tooling (Git, DVC, MLflow).
+  Media & Communications Wing, Peshawar. Managed data pipelines and IT operations, coordinating
+  cross-functional digital workflows.
 
 ## Volunteering
 
-- AI education workshops with Ranraa Children Foundation and FAST CSS — hands-on AI/LLM
-  sessions on practical AI tools for underprivileged children in Peshawar (2025–2026).
+- AI education workshops with Ranraa Children Foundation and FAST CSS — hands-on AI/LLM sessions
+  on practical AI tools for underprivileged children in Peshawar (2025–2026).
 
 ## Links
 
