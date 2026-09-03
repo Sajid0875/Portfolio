@@ -1,0 +1,42 @@
+/* Shared OG card chrome — the site's technical-plate identity at 1200x630.
+   Paper ground, engineering grid, ink type, one ultramarine accent. No gradients. */
+* { margin:0; padding:0; box-sizing:border-box; }
+html, body { width:1200px; height:630px; }
+body {
+  background:#EDECE7; color:#16181C;
+  font-family:'Newsreader', Georgia, serif;
+  position:relative; overflow:hidden;
+}
+/* engineering-paper grid */
+body::before {
+  content:''; position:absolute; inset:0;
+  background-image:
+    linear-gradient(rgba(22,24,28,.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(22,24,28,.045) 1px, transparent 1px);
+  background-size:34px 34px;
+}
+/* corner registration ticks — safe-area markers, and part of the drafting look */
+.tick { position:absolute; width:22px; height:22px; border:1px solid #B4B3AA; }
+.tick.tl { top:56px; left:56px; border-right:0; border-bottom:0; }
+.tick.tr { top:56px; right:56px; border-left:0; border-bottom:0; }
+.tick.bl { bottom:56px; left:56px; border-right:0; border-top:0; }
+.tick.br { bottom:56px; right:56px; border-left:0; border-top:0; }
+
+.card { position:absolute; inset:0; padding:96px 100px; display:flex;
+        flex-direction:column; justify-content:space-between; }
+.eyebrow { font-family:'Martian Mono', ui-monospace, Menlo, monospace;
+  font-size:15px; font-weight:600; letter-spacing:.22em; text-transform:uppercase;
+  color:#1B2ED8; }
+.title { font-family:'Bricolage Grotesque', system-ui, sans-serif;
+  font-weight:700; letter-spacing:-.03em; line-height:1.0; color:#16181C; }
+.sub { font-size:26px; line-height:1.45; color:#5E626B; max-width:640px; }
+.foot { display:flex; align-items:center; justify-content:space-between; }
+.byline { font-family:'Martian Mono', ui-monospace, Menlo, monospace;
+  font-size:16px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:#16181C; }
+.byline .dot { display:inline-block; width:9px; height:9px; background:#1B2ED8;
+  margin-right:12px; vertical-align:middle; }
+.domain { font-family:'Martian Mono', ui-monospace, Menlo, monospace;
+  font-size:14px; letter-spacing:.12em; color:#5E626B; }
+.rule { height:1px; background:#CFCEC7; margin:26px 0; }
+.figcap { font-family:'Martian Mono', ui-monospace, Menlo, monospace;
+  font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:#5E626B; }

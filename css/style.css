@@ -557,6 +557,89 @@ article.core:hover { border-color: var(--ink); background: var(--paper-3); }
 .case__next { margin-top: 2.5rem; }
 .case__next a { color: var(--accent); border-bottom: 1px solid var(--accent); }
 
+/* Homepage writing teaser — same rhythm as the other homepage sections. */
+.writing-teaser { max-width: var(--max); margin: 0 auto; padding: 5rem 1.5rem 0; }
+.writing-teaser__body { color: var(--graphite); max-width: 62ch; margin-bottom: 1.5rem; }
+.writing-teaser__body a { color: var(--accent); border-bottom: 1px solid var(--rule-firm); }
+
+/* ---------- Writing: index + articles ---------- */
+/* A draft is marked in the page itself, not only in a robots directive, so a reader
+   who arrives from a shared link knows what they are reading. */
+.draft-banner { border: 1px solid var(--rule-firm); border-left: 3px solid var(--oxide);
+  background: var(--paper-2); padding: 1rem 1.15rem; margin: 0 0 2rem; }
+.draft-banner p { margin: 0; font-size: 0.94rem; color: var(--graphite); }
+.draft-banner code { font-family: var(--font-mono); font-size: 0.72em;
+  background: var(--paper-3); border: 1px solid var(--rule); padding: 0.05em 0.3em; }
+
+.writing-list { display: flex; flex-direction: column; gap: 0; margin: 0 0 1rem; }
+.writing-item { padding: 1.6rem 0; border-top: 1px solid var(--rule); }
+.writing-item:last-child { border-bottom: 1px solid var(--rule); }
+.writing-item h2 { font-size: 1.3rem; letter-spacing: -0.02em; margin: 0 0 0.6rem;
+  max-width: 30ch; }
+.writing-item h2 a { color: var(--ink); }
+.writing-item h2 a:hover, .writing-item h2 a:focus-visible { color: var(--accent); }
+.writing-item p { color: var(--graphite); margin-bottom: 0.5rem; }
+.writing-item__meta { font-family: var(--font-mono); font-size: 0.62rem;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--graphite);
+  display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: baseline; }
+.writing-item__status { color: var(--oxide); border: 1px solid var(--rule-firm);
+  padding: 0.1rem 0.4rem; }
+.writing-item__rel { font-size: 0.9rem; margin-bottom: 0; }
+.writing-item__rel a { color: var(--accent); border-bottom: 1px solid var(--rule-firm); }
+
+/* Numbered procedure list — used where prose order is the point. */
+.steps { counter-reset: step; display: flex; flex-direction: column; gap: 0.5rem;
+  margin: 0 0 1rem; }
+.steps li { counter-increment: step; position: relative; padding-left: 2rem;
+  color: var(--graphite); }
+.steps li::before { content: counter(step); position: absolute; left: 0; top: 0.1em;
+  font-family: var(--font-mono); font-size: 0.62rem; color: var(--accent);
+  border: 1px solid var(--rule-firm); width: 1.35rem; height: 1.35rem;
+  display: grid; place-items: center; }
+.case ol.steps { list-style: none; }
+
+.footer__meta a { color: var(--graphite); border-bottom: 1px solid var(--rule); }
+.footer__meta a:hover, .footer__meta a:focus-visible { color: var(--accent); }
+
+/* Architecture diagrams. Inline SVG rather than <img>, so the labels stay real text:
+   readable by crawlers and answer engines, announced by screen readers via title/desc,
+   and reflowable under forced-colors. The viewBox is deliberately narrow and vertical so
+   the type is still legible at 320px. */
+.diagram-fig { margin: 0 0 1.6rem; }
+.diagram-fig svg { display: block; width: 100%; height: auto;
+  max-width: 520px; margin: 0 auto 0.75rem; }
+.diagram-fig figcaption { font-size: 0.88rem; color: var(--graphite);
+  padding-top: 0.7rem; border-top: 1px solid var(--rule); }
+.diagram-fig figcaption code { font-family: var(--font-mono); font-size: 0.72em;
+  background: var(--paper-2); border: 1px solid var(--rule); padding: 0.05em 0.3em; }
+/* Windows high-contrast / forced-colors: let the OS repaint the strokes and text. */
+@media (forced-colors: active) {
+  .diagram-fig svg rect, .diagram-fig svg line, .diagram-fig svg path { forced-color-adjust: auto; }
+}
+
+/* Page + project dates. Two distinct facts, deliberately not merged: when this
+   write-up was published, and when the software itself was built. */
+.case__meta { display: flex; flex-wrap: wrap; gap: 0.35rem 1.25rem; margin: -0.35rem 0 1.4rem;
+  font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--graphite); }
+.case__meta time { color: var(--ink); }
+.footer__meta { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--graphite); }
+
+/* Evidence note — a qualified/attributed claim, set apart from body prose. */
+.case__note { border-left: 2px solid var(--rule-firm); background: var(--paper-2);
+  padding: 0.85rem 1rem; margin: 0 0 1rem; font-size: 0.94rem; }
+.case__note strong:first-child { font-family: var(--font-mono); font-size: 0.62rem;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--oxide);
+  display: block; margin-bottom: 0.35rem; }
+.case__note a { color: var(--accent); border-bottom: 1px solid var(--rule-firm); }
+
+/* Inline formula plate */
+.case__formula { border: 1px solid var(--rule); background: var(--paper-2);
+  padding: 0.8rem 1rem; margin: 0 0 1rem; overflow-x: auto; }
+.case__formula code { font-family: var(--font-mono); font-size: 0.72rem;
+  letter-spacing: 0.02em; color: var(--ink); white-space: nowrap; }
+
 /* Project cards now navigate via a real link; keep the type styling identical. */
 .core__title a { color: inherit; }
 .core:hover .core__title a { color: var(--accent); }

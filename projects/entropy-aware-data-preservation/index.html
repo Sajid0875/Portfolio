@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>Entropy-Aware Data Preservation — PostgreSQL Case Study</title>
-  <meta name="description" content="Case study: a PostgreSQL system that scores state snapshots by entropy and decides whether to discard, compress, preserve or archive them. PL/pgSQL and PHP." />
+  <meta name="description" content="Case study: a PostgreSQL system that scores state snapshots in-database with PL/pgSQL triggers, then decides whether to discard, compress, preserve or archive each one." />
   <meta name="author" content="Sajid Islam" />
   <meta name="theme-color" content="#EDECE7" />
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
@@ -17,15 +17,16 @@
   <meta property="og:locale" content="en_US" />
   <meta property="og:title" content="Entropy-Aware Data Preservation — PostgreSQL Case Study" />
   <meta property="og:description" content="A PostgreSQL system that scores state snapshots by entropy and automatically decides whether to discard, compress, preserve or archive them." />
-  <meta property="og:image" content="https://sajiddev.systems/assets/images/og-cover.png" />
+  <meta property="og:image" content="https://sajiddev.systems/assets/images/og-entropy-aware-data-preservation.png" />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="Sajid Islam — Agentic AI and Python Engineer" />
+  <meta property="og:image:alt" content="Case-study card on pale grey drafting paper: the title Entropy-Aware Data Preservation in heavy black type beside a small bar chart of snapshot scores, with two bars crossing a threshold line marked archive. Signed Sajid Islam, sajiddev.systems." />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Entropy-Aware Data Preservation — PostgreSQL Case Study" />
   <meta name="twitter:description" content="A PostgreSQL system that scores state snapshots by entropy and decides whether to discard, compress, preserve or archive them." />
-  <meta name="twitter:image" content="https://sajiddev.systems/assets/images/og-cover.png" />
+  <meta name="twitter:image" content="https://sajiddev.systems/assets/images/og-entropy-aware-data-preservation.png" />
+  <meta name="twitter:image:alt" content="Case-study card on pale grey drafting paper: the title Entropy-Aware Data Preservation in heavy black type beside a small bar chart of snapshot scores, with two bars crossing a threshold line marked archive. Signed Sajid Islam, sajiddev.systems." />
 
   <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png" />
@@ -48,15 +49,29 @@
         "@id": "https://sajiddev.systems/#project-adaptive-data-preservation",
         "name": "Entropy-Aware Data Preservation System",
         "headline": "Entropy-Aware Data Preservation — PostgreSQL Case Study",
-        "description": "A database system that tracks state snapshots, records state changes, calculates entropy scores in PL/pgSQL, and automatically recommends whether each snapshot should be discarded, compressed, preserved or archived, with integrity checks, audit logs, snapshot comparison and export through a PHP interface.",
+        "description": "A PostgreSQL system that tracks state snapshots, records state changes, and scores each snapshot with an in-database PL/pgSQL weighted change-density metric, then automatically recommends whether it should be discarded, compressed, preserved or archived. 10 tables, 10 functions, 12 triggers and 3 views, with integrity checks, audit logs, snapshot comparison and export through a PHP 8 web interface using Chart.js. A three-person university DBMS project.",
         "url": "https://sajiddev.systems/projects/entropy-aware-data-preservation/",
         "mainEntityOfPage": { "@type": "WebPage", "@id": "https://sajiddev.systems/projects/entropy-aware-data-preservation/" },
         "codeRepository": "https://github.com/Sajid0875/adaptive-data-preservation",
         "programmingLanguage": ["PL/pgSQL", "PHP", "SQL", "JavaScript"],
         "keywords": "PostgreSQL, PL/pgSQL, database triggers, entropy scoring, data preservation, audit logging, Chart.js, PHP",
         "inLanguage": "en",
+        "dateCreated": "2026-02-22",
         "author": { "@id": "https://sajiddev.systems/#person" },
         "isPartOf": { "@id": "https://sajiddev.systems/#website" }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://sajiddev.systems/projects/entropy-aware-data-preservation/",
+        "url": "https://sajiddev.systems/projects/entropy-aware-data-preservation/",
+        "name": "Entropy-Aware Data Preservation \u2014 PostgreSQL Case Study",
+        "inLanguage": "en",
+        "datePublished": "2026-09-03",
+        "dateModified": "2026-09-03",
+        "isPartOf": { "@id": "https://sajiddev.systems/#website" },
+        "breadcrumb": { "@id": "https://sajiddev.systems/projects/entropy-aware-data-preservation/#breadcrumb" },
+        "about": { "@id": "https://sajiddev.systems/#project-adaptive-data-preservation" },
+        "author": { "@id": "https://sajiddev.systems/#person" }
       },
       {
         "@type": "Person",
@@ -81,6 +96,7 @@
       <a href="/#about">Origin</a>
       <a href="/#skills">Ecosystem</a>
       <a href="/#projects">Memory</a>
+      <a href="/writing/">Writing</a>
       <a href="/#contact" class="nav__cta">Open Channel</a>
     </nav>
   </header>
@@ -98,10 +114,16 @@
     <span class="case__tag">Data Engineering · University DBMS Project</span>
     <h1>Entropy-Aware Data Preservation System</h1>
 
+    <p class="case__meta">
+      <span>Case study published <time datetime="2026-09-03">3 September 2026</time></span>
+      <span>Project built <time datetime="2026-02-22">22 February</time>–<time datetime="2026-05-17">17 May 2026</time></span>
+    </p>
+
     <p class="case__answer">A PostgreSQL system that tracks state snapshots, records every change, and
-      scores each snapshot by entropy — then automatically recommends whether it should be discarded,
-      compressed, preserved or archived. The scoring and routing run inside the database as PL/pgSQL
-      functions and triggers, with a PHP dashboard for entropy trends and audit logs. Its full title is
+      gives each snapshot an "entropy" score — in practice a weighted change-density ratio — then
+      automatically recommends whether it should be discarded, compressed, preserved or archived. The
+      scoring and routing run inside the database as PL/pgSQL functions and triggers, with a PHP
+      dashboard for trends and audit logs. Its full title is
       <em>Universe State Compression &amp; Entropy-Aware Data Preservation System</em>.</p>
 
     <section>
@@ -116,10 +138,11 @@
     <section>
       <h2>Solution</h2>
       <p>Retention is treated as a measurement problem rather than a scheduling one. Each snapshot is
-        scored by how much information it carries, and that score drives an automatic recommendation.</p>
+        scored by how much change it packs into its footprint, and that score drives an automatic
+        recommendation.</p>
       <ul>
         <li><strong>Snapshot tracking</strong> — universe/state snapshots and their state changes are recorded.</li>
-        <li><strong>Entropy scoring</strong> — a score is computed per snapshot by in-database functions.</li>
+        <li><strong>Entropy scoring</strong> — a weighted change-density score is computed per snapshot by in-database functions.</li>
         <li><strong>Preservation decisions</strong> — each snapshot is routed to discard, compress, preserve or archive.</li>
         <li><strong>Integrity checks and audit logs</strong> — changes and decisions are traceable after the fact.</li>
         <li><strong>Snapshot comparison and export</strong> — snapshots can be diffed and exported.</li>
@@ -131,13 +154,98 @@
       <p>The logic lives in the database rather than in application code, so the scoring cannot be
         bypassed by whichever client happens to write the data.</p>
       <dl>
-        <dt>Schema</dt><dd>10 tables defined in <code>01_schema.sql</code>.</dd>
-        <dt>Logic</dt><dd>PL/pgSQL functions, 12 triggers and 3 views in <code>02_functions_triggers_views.sql</code>; entropy is computed with logarithmic functions.</dd>
-        <dt>Interface</dt><dd>PHP 8 web application reading the same database, charting entropy trends with Chart.js.</dd>
+        <dt>Schema</dt><dd>10 tables in <code>01_schema.sql</code> — <code>universes</code>,
+          <code>state_snapshots</code>, <code>state_changes</code>, <code>entropy_metrics</code>,
+          <code>preservation_rules</code>, <code>preservation_decisions</code>,
+          <code>compressed_states</code>, <code>archives</code>, <code>integrity_checks</code>
+          and <code>audit_logs</code>.</dd>
+        <dt>Logic</dt><dd>10 PL/pgSQL functions, 12 triggers and 3 views in <code>02_functions_triggers_views.sql</code>.</dd>
+        <dt>Interface</dt><dd>PHP&nbsp;8 web application reading the same database, charting entropy trends with Chart.js.</dd>
+        <dt>Containers</dt><dd>An optional Docker Compose environment brings up a PHP&nbsp;8.3 app container and a PostgreSQL&nbsp;16 database container, loading the three SQL files automatically.</dd>
         <dt>Setup</dt><dd>Schema, functions/triggers/views and sample data load as three ordered <code>psql</code> scripts.</dd>
       </dl>
       <p>Because the triggers fire on write, a snapshot is scored and classified as it arrives — the
         recommendation is a property of the data, not the result of a batch job run later.</p>
+
+      <figure class="diagram-fig">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 761" width="520" height="761" role="img" aria-labelledby="en-arch-t en-arch-d" class="diagram">
+        <title id="en-arch-t">How a snapshot is scored and routed inside PostgreSQL</title>
+        <desc id="en-arch-d">A vertical flow diagram. A new state snapshot is inserted into the state_snapshots table together with its state changes. That write fires the ai_state_snapshots_after_insert trigger, one of twelve triggers in the schema, which calls calculate_entropy. That function computes the sum of change weights multiplied by the count of state changes, divided by the snapshot size in megabytes, where change weights are CREATE 1, UPDATE 2, DELETE 3 and CORRUPTION 5. The score is passed to decide_preservation, which matches it against threshold rows in the preservation_rules table and routes the snapshot to one of four outcomes: discard, compress, preserve or archive. The decision and a generated reason are written to preservation_decisions, nine further audit triggers record every write to audit_logs through fn_audit_log, and a PHP 8 dashboard reads three views — snapshot_summary, entropy_trends and preservation_stats — charting them with Chart.js. The schema holds 10 tables, 10 PL/pgSQL functions, 12 triggers and 3 views, all inside PostgreSQL.</desc>
+        <rect x="60" y="4" width="400" height="62" rx="3" fill="#F6F5F1" stroke="#B4B3AA" stroke-width="1"/>
+        <text x="78" y="31" font-family="'Martian Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="600" letter-spacing="0.06em" fill="#16181C">New state snapshot</text>
+        <text x="78" y="51" font-family="'Martian Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" letter-spacing="0.04em" fill="#5E626B">INSERT into state_snapshots</text>
+        <line x1="260" y1="66" x2="260" y2="93" stroke="#B4B3AA" stroke-width="1"/>
+        <path d="M255.5 93 L264.5 93 L260 100 Z" fill="#B4B3AA"/>
+        <text x="272" y="86.0" font-family="'Martian Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10" letter-spacing="0.06em" fill="#5E626B">fires on write</text>
+        <rect x="60" y="100" width="400" height="62" rx="3" fill="#F6F5F1" stroke="#B4B3AA" stroke-width="1"/>
+        <text x="78" y="127" font-family="'Martian Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="600" letter-spacing="0.06em" fill="#16181C">Trigger</text>
+        <text x="78" y="147" font-family="'Martian Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" letter-spacing="0.04em" fill="#5E626B">ai_state_snapshots_after_insert</text>
+        <text x="442" y="127" text-anchor="end" font-family="'Martian Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10.5" letter-spacing="0.06em" fill="#5E626B">1 of 12</text>
+        <line x1="260" y1="162" x2="260" y2="189" stroke="#B4B3AA" stroke-width="1"/>
+        <path d="M255.5 189 L264.5 189 L260 196 Z" fill="#B4B3AA"/>
+        <rect x="60" y="196" width="400" height="62" rx="3" fill="#F6F5F1" stroke="#1B2ED8" stroke-width="1"/>
+        <text x="78" y="223" font-family="'Martian Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="600" letter-spacing="0.06em" fill="#1B2ED8">calculate_entropy()</text>
+        <text x="78" y="243" font-family="'Martian Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" letter-spacing="0.04em" fill="#5E626B">Σ(change_weight) × count / size_mb</text>
+        <text x="78" y="268" font-family="'Martian Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10" letter-spacing="0.05em" fill="#5E626B">weights — CREATE 1 · UPDATE 2 · DELETE 3 · CORRUPTION 5</text>
+        <rect x="60" y="292" width="400" height="62" rx="3" fill="#F6F5F1" stroke="#B4B3AA" stroke-width="1"/>
+        <text x="78" y="319" font-family="'Martian Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="600" letter-spacing="0.06em" fill="#16181C">decide_preservation()</text>
+        <text x="78" y="339" font-family="'Martian Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" letter-spacing="0.04em" fill="#5E626B">score vs preservation_rules thresholds</text>
+        <line x1="260" y1="354" x2="260" y2="381" stroke="#B4B3AA" stroke-width="1"/>
+        <path d="M255.5 381 L264.5 381 L260 388 Z" fill="#B4B3AA"/>
+        <rect x="60" y="388" width="94" height="36" rx="3" fill="#F6F5F1" stroke="#B4B3AA" stroke-width="1"/>
+        <text x="107" y="411" text-anchor="middle" font-family="'Martian Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="600" letter-spacing="0.06em" fill="#16181C">DISCARD</text>
+        <rect x="162" y="388" width="94" height="36" rx="3" fill="#F6F5F1" stroke="#B4B3AA" stroke-width="1"/>
+        <text x="209" y="411" text-anchor="middle" font-family="'Martian Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="600" letter-spacing="0.06em" fill="#16181C">COMPRESS</text>
+        <rect x="264" y="388" width="94" height="36" rx="3" fill="#F6F5F1" stroke="#1B2ED8" stroke-width="1"/>
+        <text x="311" y="411" text-anchor="middle" font-family="'Martian Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="600" letter-spacing="0.06em" fill="#1B2ED8">PRESERVE</text>
+        <rect x="366" y="388" width="94" height="36" rx="3" fill="#F6F5F1" stroke="#1B2ED8" stroke-width="1"/>
+        <text x="413" y="411" text-anchor="middle" font-family="'Martian Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="600" letter-spacing="0.06em" fill="#1B2ED8">ARCHIVE</text>
+        <line x1="107" y1="378" x2="413" y2="378" stroke="#B4B3AA" stroke-width="1"/>
+        <line x1="107" y1="378" x2="107" y2="385" stroke="#B4B3AA" stroke-width="1"/>
+        <path d="M102.5 385 L111.5 385 L107 392 Z" fill="#B4B3AA"/>
+        <line x1="209" y1="378" x2="209" y2="385" stroke="#B4B3AA" stroke-width="1"/>
+        <path d="M204.5 385 L213.5 385 L209 392 Z" fill="#B4B3AA"/>
+        <line x1="311" y1="378" x2="311" y2="385" stroke="#B4B3AA" stroke-width="1"/>
+        <path d="M306.5 385 L315.5 385 L311 392 Z" fill="#B4B3AA"/>
+        <line x1="413" y1="378" x2="413" y2="385" stroke="#B4B3AA" stroke-width="1"/>
+        <path d="M408.5 385 L417.5 385 L413 392 Z" fill="#B4B3AA"/>
+        <line x1="260" y1="424" x2="260" y2="451" stroke="#B4B3AA" stroke-width="1"/>
+        <path d="M255.5 451 L264.5 451 L260 458 Z" fill="#B4B3AA"/>
+        <rect x="60" y="458" width="400" height="62" rx="3" fill="#F6F5F1" stroke="#B4B3AA" stroke-width="1"/>
+        <text x="78" y="485" font-family="'Martian Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="600" letter-spacing="0.06em" fill="#16181C">preservation_decisions</text>
+        <text x="78" y="505" font-family="'Martian Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" letter-spacing="0.04em" fill="#5E626B">decision + generated reason stored</text>
+        <line x1="260" y1="520" x2="260" y2="547" stroke="#B4B3AA" stroke-width="1"/>
+        <path d="M255.5 547 L264.5 547 L260 554 Z" fill="#B4B3AA"/>
+        <text x="272" y="540.0" font-family="'Martian Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10" letter-spacing="0.06em" fill="#5E626B">9 audit triggers</text>
+        <rect x="60" y="554" width="400" height="62" rx="3" fill="#F6F5F1" stroke="#B4B3AA" stroke-width="1"/>
+        <text x="78" y="581" font-family="'Martian Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="600" letter-spacing="0.06em" fill="#16181C">audit_logs</text>
+        <text x="78" y="601" font-family="'Martian Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" letter-spacing="0.04em" fill="#5E626B">fn_audit_log() records every write</text>
+        <line x1="260" y1="616" x2="260" y2="643" stroke="#B4B3AA" stroke-width="1"/>
+        <path d="M255.5 643 L264.5 643 L260 650 Z" fill="#B4B3AA"/>
+        <text x="272" y="636.0" font-family="'Martian Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10" letter-spacing="0.06em" fill="#5E626B">read through 3 views</text>
+        <rect x="60" y="650" width="400" height="62" rx="3" fill="#F6F5F1" stroke="#B4B3AA" stroke-width="1"/>
+        <text x="78" y="677" font-family="'Martian Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13" font-weight="600" letter-spacing="0.06em" fill="#16181C">PHP 8 dashboard</text>
+        <text x="78" y="697" font-family="'Martian Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" letter-spacing="0.04em" fill="#5E626B">3 views, charted with Chart.js</text>
+        <text x="60" y="732" font-family="'Martian Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10" letter-spacing="0.05em" fill="#5E626B">10 tables · 10 functions · 12 triggers · 3 views,</text>
+        <text x="60" y="747" font-family="'Martian Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10" letter-spacing="0.05em" fill="#5E626B">all inside PostgreSQL.</text>
+      </svg>
+        <figcaption>Fig. 1 — what happens to a snapshot between the INSERT and the dashboard, taken
+          from <code>01_schema.sql</code> and <code>02_functions_triggers_views.sql</code>. The counts
+          and function names are the ones in the SQL files, not a simplification.</figcaption>
+      </figure>
+
+      <h3>How the entropy score is actually calculated</h3>
+      <p>The name is borrowed from information theory, but the metric is a deliberately simple
+        <strong>weighted change-density score</strong>, not Shannon entropy and not a logarithmic
+        measure. <code>calculate_entropy(snapshot_id)</code> computes:</p>
+      <p class="case__formula"><code>entropy = (SUM(change_weight) &times; COUNT(state_changes)) / snapshot_size_mb</code></p>
+      <p>Each recorded change carries a weight assigned by <code>fn_change_weight()</code> — CREATE&nbsp;1,
+        UPDATE&nbsp;2, DELETE&nbsp;3, CORRUPTION&nbsp;5 — so a snapshot scores highly when it packs many
+        heavily-weighted changes into a small footprint. <code>decide_preservation()</code> then matches
+        that score against threshold rows in the <code>preservation_rules</code> table and writes a
+        decision plus a generated reason into <code>preservation_decisions</code>. Naming it "entropy"
+        is the honest weak point of the project: it measures change density, and calling it entropy
+        promises more information-theoretic rigour than the formula delivers.</p>
     </section>
 
     <section>
@@ -151,9 +259,10 @@
     <section>
       <h2>Team and my contribution</h2>
       <p>A <strong>three-person university DBMS project</strong> — Sajid Islam, Azwar Khan and Abbas
-        Bajwa — built for coursework at FAST NUCES. My résumé records my contribution as the
-        PostgreSQL entropy pipeline and the rule-based preservation logic.</p>
-      <p>The public repository does not document which member wrote which file, so the split is not
+        Bajwa — built for coursework at FAST NUCES, as listed in the repository's submission README.
+        My résumé records my contribution as the PostgreSQL scoring pipeline and the rule-based
+        preservation logic.</p>
+      <p>The repository does not document which member wrote which file, so the split is not
         broken down further here.</p>
     </section>
 
@@ -164,10 +273,25 @@
           was validated against sample data rather than a production workload.</li>
         <li>Preservation decisions are <strong>rule-based thresholds</strong> over the entropy score,
           not a learned policy — predictable and inspectable, but not adaptive.</li>
-        <li>It runs locally against a PostgreSQL instance; there is no hosted demo.</li>
+        <li>The metric is a weighted change-density ratio, not Shannon entropy — the project's name
+          overstates the mathematics, which is the correction this write-up exists to make.</li>
+        <li>It runs locally against a PostgreSQL instance; there is no hosted demo, and the bundled
+          web interface ships with a single hard-coded demo login rather than real user management.</li>
         <li>The lesson that transferred furthest: <em>putting the rules in the database</em>. Triggers
           and views meant the classification held no matter which client wrote the data — the same
           instinct behind grounding an LLM in retrieved records instead of trusting the caller.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Related reading</h2>
+      <ul>
+        <li><a href="/writing/entropy-aware-data-preservation-postgresql-triggers/">A closer look at
+          the trigger pipeline</a> — what the score actually computes, why the thresholds live in a
+          table, and the cost of logic that acts at a distance. <em>Draft.</em></li>
+        <li><a href="/projects/whatsapp-commerce-copilot/">WhatsApp Commerce Copilot</a> — the same
+          instinct applied to a language model: constrain it in code rather than in a prompt.</li>
+        <li><a href="/writing/">All writing</a> — technical notes drawn from these two projects.</li>
       </ul>
     </section>
 
@@ -183,6 +307,10 @@
 
   <footer class="footer">
     <p>© <span id="year">2026</span> Sajid Islam · <a href="/">sajiddev.systems</a></p>
+    <p class="footer__meta"><a href="/writing/">Writing</a> · <a href="/#projects">Projects</a> ·
+      <a href="/assets/resume/Sajid_Islam_Resume.pdf">Résumé (PDF)</a> ·
+      <a href="https://github.com/Sajid0875" rel="me noopener">GitHub</a> ·
+      <a href="https://www.linkedin.com/in/sajid-islam0875/" rel="me noopener">LinkedIn</a></p>
   </footer>
 
 </body>

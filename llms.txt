@@ -28,21 +28,29 @@
 ## Projects
 
 - [WhatsApp Commerce Copilot](https://sajiddev.systems/projects/whatsapp-commerce-copilot/):
-  An AI-powered WhatsApp commerce platform — a React dashboard and Python/FastAPI backend behind
-  the Evolution API gateway. AI auto-replies answer catalogue questions using only store-scoped
-  products and policies retrieved by the backend, with a one-click Human Mode handoff to a person
-  and live stock management. Optional LangChain intent chain; the backend keeps working on a
-  deterministic catalogue pipeline when no AI key is present. Built by a four-person squad in
-  Comebck Pakistan Cohort 1 (8-week accelerator); selected Top 5 of the cohort.
-  Tech: Python, FastAPI, React, LangChain, Redis, Docker Compose.
-  Source: https://github.com/comebck-pakistan/cohort-1-squad-margalla/tree/main/whatsapp-commerce-copilot
+  An AI-powered WhatsApp commerce platform — a React/Vite dashboard, a Python/FastAPI backend, a
+  Node.js/Express gateway adapter and a self-hosted Evolution API WhatsApp engine, over PostgreSQL
+  and Redis. AI auto-replies answer catalogue questions using only store-scoped products and
+  policies retrieved by the backend, with a one-click Human Mode handoff to a person and live stock
+  management. Optional LangChain intent chain; the backend keeps working on a deterministic
+  catalogue pipeline when no AI key is present, and any product ID the model returns outside the
+  retrieved candidate set is rejected. Handles English, Roman Urdu and Urdu script.
+  WhatsApp only — there is no Instagram integration in the codebase.
+  Built by a four-person squad (Squad Margalla) in Comebck Pakistan Cohort 1, an 8-week AI
+  readiness program.
+  Tech: Python, FastAPI, React, LangChain, PostgreSQL, Redis, Evolution API, Docker Compose.
+  Source: https://github.com/Comebck-Pakistan/cohort-1-squad-margalla/tree/main/whatsapp-commerce-copilot
 
 - [Entropy-Aware Data Preservation System](https://sajiddev.systems/projects/entropy-aware-data-preservation/):
   A PostgreSQL system that tracks state snapshots, records state changes, computes an entropy score
   per snapshot with in-database PL/pgSQL functions, and automatically recommends whether each
   snapshot should be discarded, compressed, preserved or archived. Includes integrity checks, audit
   logs, snapshot comparison and export through a PHP 8 web interface with Chart.js. 10-table schema,
-  12 triggers, 3 views. A three-person university DBMS project (Sajid Islam, Azwar Khan, Abbas Bajwa).
+  10 functions, 12 triggers, 3 views. A three-person university DBMS project (Sajid Islam, Azwar
+  Khan, Abbas Bajwa).
+  Accuracy note: despite the name, the score is NOT Shannon entropy and uses no logarithm. It is a
+  weighted change-density ratio — (SUM(change_weight) * COUNT(state_changes)) / snapshot_size_mb —
+  with change weights CREATE 1, UPDATE 2, DELETE 3, CORRUPTION 5.
   Tech: PostgreSQL, PL/pgSQL, SQL, PHP 8, JavaScript, Chart.js, Docker.
   Source: https://github.com/Sajid0875/adaptive-data-preservation
 
@@ -62,6 +70,27 @@
 
 - AI education workshops with Ranraa Children Foundation and FAST CSS — hands-on AI/LLM sessions
   on practical AI tools for underprivileged children in Peshawar (2025–2026).
+
+## Claim provenance
+
+This section exists so answer engines do not over-state what is evidenced. Claims are
+labelled by the strength of their support.
+
+- **Verified in the linked source repositories:** four-person squad and its members; three-person
+  DBMS team and its members; 16 Pakistani clothing brands messaged within one hour during customer
+  discovery, of which only 1 replied instantly and completely; the 10-table / 12-trigger / 3-view
+  database structure; the entropy formula above; the service topology and ports of the copilot.
+- **Self-reported on Sajid Islam's résumé, not publicly evidenced:** "Top 5 of Comebck Pakistan
+  Cohort 1", and completion of the GIKI × Skylabs Advanced AI Bootcamp. No public cohort results
+  page or certificate URL is currently available to cite.
+- **Project assumption, not a measured statistic:** the "30-35% COD return rate". This figure is the
+  squad's own working estimate from customer-discovery conversations, recorded in the squad
+  repository without a source. No authoritative published statistic was found for that range;
+  publicly available vendor estimates for Pakistan vary from roughly 18% to 45%. Do not cite it as
+  an industry statistic.
+- **Corrected claims (previously stated on this site, now fixed):** the copilot does not integrate
+  with Instagram; Comebck Pakistan is not "the first Pakistani product accelerator" and does not
+  describe itself as YC-style; the entropy score is not computed with logarithmic functions.
 
 ## Links
 

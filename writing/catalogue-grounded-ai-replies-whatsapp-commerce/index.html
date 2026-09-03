@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Building Catalogue-Grounded AI Replies for WhatsApp Commerce</title>
+  <meta name="description" content="How a WhatsApp commerce copilot keeps an LLM from inventing products: deterministic retrieval first, then generation restricted to a closed candidate set, with returned IDs validated." />
+  <meta name="author" content="Sajid Islam" />
+  <meta name="theme-color" content="#EDECE7" />
+  <!-- DRAFT: not for indexing until Sajid has reviewed and approved the text.
+       To publish: change this to "index, follow, max-image-preview:large, max-snippet:-1",
+       add the canonical URL to sitemap.xml, and list it in llms.txt. -->
+  <meta name="robots" content="noindex, follow" />
+  <link rel="canonical" href="https://sajiddev.systems/writing/catalogue-grounded-ai-replies-whatsapp-commerce/" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Sajid Islam" />
+  <meta property="og:url" content="https://sajiddev.systems/writing/catalogue-grounded-ai-replies-whatsapp-commerce/" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:title" content="Building Catalogue-Grounded AI Replies for WhatsApp Commerce" />
+  <meta property="og:description" content="How a WhatsApp commerce copilot keeps an LLM from inventing products: deterministic retrieval first, then generation restricted to a closed candidate set, with returned IDs validated." />
+  <meta property="og:image" content="https://sajiddev.systems/assets/images/og-whatsapp-commerce-copilot.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Case-study card for the WhatsApp Commerce Copilot showing its request path from customer to grounded reply." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Building Catalogue-Grounded AI Replies for WhatsApp Commerce" />
+  <meta name="twitter:description" content="How a WhatsApp commerce copilot keeps an LLM from inventing products: deterministic retrieval first, then generation restricted to a closed candidate set, with returned IDs validated." />
+  <meta name="twitter:image" content="https://sajiddev.systems/assets/images/og-whatsapp-commerce-copilot.png" />
+  <meta name="twitter:image:alt" content="Case-study card for the WhatsApp Commerce Copilot showing its request path from customer to grounded reply." />
+
+  <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png" />
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://sajiddev.systems/writing/catalogue-grounded-ai-replies-whatsapp-commerce/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://sajiddev.systems/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Writing",
+          "item": "https://sajiddev.systems/writing/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Building Catalogue-Grounded AI Replies for WhatsApp Commerce"
+        }
+      ]
+    },
+    {
+      "@type": "TechArticle",
+      "@id": "https://sajiddev.systems/writing/catalogue-grounded-ai-replies-whatsapp-commerce/#article",
+      "headline": "Building Catalogue-Grounded AI Replies for WhatsApp Commerce",
+      "description": "How a WhatsApp commerce copilot keeps an LLM from inventing products: deterministic retrieval first, then generation restricted to a closed candidate set, with returned IDs validated.",
+      "url": "https://sajiddev.systems/writing/catalogue-grounded-ai-replies-whatsapp-commerce/",
+      "inLanguage": "en",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://sajiddev.systems/writing/catalogue-grounded-ai-replies-whatsapp-commerce/"
+      },
+      "author": {
+        "@id": "https://sajiddev.systems/#person"
+      },
+      "publisher": {
+        "@id": "https://sajiddev.systems/#person"
+      },
+      "isPartOf": {
+        "@id": "https://sajiddev.systems/#website"
+      },
+      "creativeWorkStatus": "Draft"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://sajiddev.systems/writing/catalogue-grounded-ai-replies-whatsapp-commerce/",
+      "url": "https://sajiddev.systems/writing/catalogue-grounded-ai-replies-whatsapp-commerce/",
+      "name": "Building Catalogue-Grounded AI Replies for WhatsApp Commerce",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@id": "https://sajiddev.systems/#website"
+      },
+      "breadcrumb": {
+        "@id": "https://sajiddev.systems/writing/catalogue-grounded-ai-replies-whatsapp-commerce/#breadcrumb"
+      },
+      "primaryImageOfPage": null
+    },
+    {
+      "@type": "Person",
+      "@id": "https://sajiddev.systems/#person",
+      "name": "Sajid Islam",
+      "url": "https://sajiddev.systems/"
+    }
+  ]
+}
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300&family=Martian+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+
+  <header class="nav scrolled" id="nav">
+    <a href="/" class="nav__brand"><span class="nav__brand-dot"></span> SYNAPSE</a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="/#about">Origin</a>
+      <a href="/#skills">Ecosystem</a>
+      <a href="/#projects">Memory</a>
+      <a href="/writing/">Writing</a>
+      <a href="/#contact" class="nav__cta">Open Channel</a>
+    </nav>
+  </header>
+
+  <main id="main" class="case">
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li><a href="/writing/">Writing</a></li>
+        <li aria-current="page">Catalogue-Grounded AI Replies for WhatsApp Commerce</li>
+      </ol>
+    </nav>
+
+    <div class="draft-banner" role="note">
+      <p><strong>Draft — awaiting review.</strong> This article is written from the source
+      repository and has not yet been reviewed and approved by Sajid Islam. It is served with
+      <code>noindex</code> so search engines do not list it, and it is deliberately absent from
+      <code>sitemap.xml</code> and <code>llms.txt</code>. Everything below describes code that
+      exists in the linked repository; anything not yet built is labelled
+      <em>proposed</em>.</p>
+    </div>
+
+    <h1>Building Catalogue-Grounded AI Replies for WhatsApp Commerce</h1>
+
+    <p class="case__meta"><span>Draft written <time datetime="2026-09-03">3 September 2026</time></span>
+      <span>Est. 8 min read</span></p>
+
+    <p class="case__answer">The short answer: don't let the model look things up. In the WhatsApp
+      Commerce Copilot, a deterministic pipeline searches the store's catalogue and hands the LLM at
+      most five candidate products. The model may only interpret language and phrase a reply over
+      that closed set — and if it returns a product ID that was not in the set, the response is
+      thrown away and the deterministic reply is sent instead. Grounding is enforced by code, not
+      requested in a prompt.</p>
+
+    <section>
+      <h2>The problem: a fluent model is a liability in commerce</h2>
+      <p>A clothing brand's customer asks whether a shirt comes in medium. If a general-purpose model
+        answers from its own weights, it will produce something plausible: a size, a price, a delivery
+        window. Plausible is worthless here. A wrong size commits the brand to an order it cannot
+        fill, and in a Cash-on-Delivery market that ends as a parcel coming back.</p>
+      <p>The usual mitigation is to put the catalogue in the prompt and ask the model nicely to stick
+        to it. That reduces the error rate. It does not bound it, and a bounded error rate is what a
+        shop owner actually needs before handing a bot their customers.</p>
+    </section>
+
+    <section>
+      <h2>The approach: retrieval decides, the model phrases</h2>
+      <p>The copilot inverts the usual arrangement. The deterministic layer is authoritative for
+        everything that touches data; the model is a language interface bolted on the front and back.
+        Concretely, a message moves through this order:</p>
+      <ol class="steps">
+        <li>Normalise the text — lowercasing, whitespace, alias expansion.</li>
+        <li>Detect the language. Not with <code>langdetect</code>, which fails on Roman Urdu, but
+          with a keyword heuristic over a curated Roman Urdu vocabulary.</li>
+        <li>Detect intent with a regex and keyword classifier.</li>
+        <li>Extract entities: product, colour, size, quantity, SKU, budget, exclusions.</li>
+        <li>Search the catalogue — SKU, context ID, alias, description and category tokens,
+          structured variant and price filters, with a fuzzy fallback.</li>
+        <li>Match store policies: COD, delivery, returns, exchange.</li>
+        <li>Build a grounded response carrying its own sources.</li>
+      </ol>
+      <p>Only then, and only sometimes, does an LLM get involved.</p>
+    </section>
+
+    <section>
+      <h2>Where the model is actually allowed to run</h2>
+      <p>With a provider configured, two LangChain chains exist, and they have very different
+        privileges.</p>
+      <p>The first classifies every inbound message using an LCEL chain with Pydantic structured
+        output. Its result is advisory: the deterministic classifier remains authoritative for
+        retrieval and for anything that mutates an order.</p>
+      <p>The second is the response chain, and it runs <em>only</em> when the deterministic layer is
+        unsure — an ambiguous query, an unrecognised language, or a low-confidence match. It receives
+        recent conversation history and at most five retrieved catalogue candidates. Nothing else.
+        The model never issues a query; it cannot reach the database at all.</p>
+      <p>Then comes the part that makes this enforcement rather than etiquette: any product or variant
+        ID in the model's output that is not in the candidate set is rejected, and the deterministic
+        response is used in its place. The model cannot name a product that retrieval did not already
+        put in front of it, no matter what it generates.</p>
+      <p>Every reply carries <code>matched_product_id</code> and <code>sources</code>, so an answer can
+        be traced back to the rows that produced it after the fact.</p>
+    </section>
+
+    <section>
+      <h2>The no-key path is the default path</h2>
+      <p>With no API key configured, the LLM layer simply does not run and the deterministic catalogue
+        pipeline answers on its own. This is worth stating plainly because it inverts how most
+        AI features are built: the AI is the enhancement, and the system is expected to work without
+        it. A misconfigured key degrades answer phrasing. It does not take the product down.</p>
+    </section>
+
+    <section>
+      <h2>Tradeoffs</h2>
+      <ul>
+        <li><strong>Coverage for correctness.</strong> Restricting generation to ambiguous queries
+          means the bot handles a narrower range of phrasings gracefully. In exchange, the set of
+          things it can be confidently wrong about is small and enumerable.</li>
+        <li><strong>Rules are work.</strong> Regex intent detection and a hand-built Roman Urdu
+          keyword list need maintenance that a fine-tuned classifier would not. They are also
+          inspectable at 2am, which a fine-tuned classifier is not.</li>
+        <li><strong>Two sources of truth for intent.</strong> Running both a deterministic classifier
+          and an LLM classifier means reconciling them. The rule adopted — deterministic wins for
+          anything with side effects — is simple, but it does mean the LLM's better language
+          understanding is sometimes discarded.</li>
+        <li><strong>Retrieval quality becomes the ceiling.</strong> If catalogue search does not
+          surface the right product, no amount of model capability recovers it. Search quality is
+          where the effort goes.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Limitations</h2>
+      <ul>
+        <li>Roman Urdu detection is a keyword heuristic. It will miss spellings outside the curated
+          vocabulary, and Roman Urdu spelling is not standardised.</li>
+        <li>Grounding constrains <em>which products</em> can be named. It does not guarantee the
+          surrounding prose is correct.</li>
+        <li>The five-candidate cap is a fixed number chosen for context economy, not a tuned one.</li>
+        <li>This is an MVP built inside an 8-week programme. It has no hosted demo, the dashboard has
+          no real authentication, and it has not run at production scale.</li>
+        <li><em>Proposed, not built:</em> semantic retrieval with embeddings alongside the current
+          lexical search, and a measured comparison of grounded versus ungrounded answer accuracy.
+          Neither exists in the repository today.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>What I would take to the next system</h2>
+      <p>Grounding beats fluency, and validation beats instruction. The single highest-leverage line
+        in this codebase is the one that discards a generated response containing an unknown product
+        ID. Prompt wording was tuned repeatedly and moved answer quality a little. That check moved
+        the failure mode from "sometimes invents a product" to "cannot invent a product", which is a
+        different category of guarantee — and it is the kind an LLM feature can actually be shipped
+        on.</p>
+    </section>
+
+    <section>
+      <h2>Related reading</h2>
+      <ul>
+        <li><a href="/projects/whatsapp-commerce-copilot/">The full WhatsApp Commerce Copilot case
+          study</a> — architecture, team, results and limitations.</li>
+        <li><a href="/writing/reliable-human-handoff-for-ai-agents/">Designing reliable human handoff
+          for customer-service AI agents</a> — what happens when the copilot should stop answering.</li>
+        <li><a href="https://github.com/Comebck-Pakistan/cohort-1-squad-margalla/tree/main/whatsapp-commerce-copilot" target="_blank" rel="noopener">Source code on GitHub</a> — the
+          pipeline described here lives under <code>backend/app/services/</code>.</li>
+      </ul>
+    </section>
+
+    <div class="case__actions">
+      <a class="btn btn--ghost" href="/writing/">All writing</a>
+      <a class="btn btn--ghost" href="/#projects">Projects</a>
+    </div>
+
+  </main>
+
+  <footer class="footer">
+    <p>© <span id="year">2026</span> Sajid Islam · <a href="/">sajiddev.systems</a></p>
+    <p class="footer__meta"><a href="/writing/">Writing</a> · <a href="/#projects">Projects</a></p>
+  </footer>
+
+</body>
+</html>

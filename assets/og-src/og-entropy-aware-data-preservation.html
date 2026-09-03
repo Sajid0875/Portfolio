@@ -1,0 +1,44 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<title>OG — Entropy-Aware Data Preservation</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Newsreader:opsz,wght@6..72,300..600&family=Martian+Mono:wght@400;600&display=block" rel="stylesheet"><link rel="stylesheet" href="_base.css">
+<style>
+  .title { font-size:68px; max-width:760px; }
+  .card { padding-right:470px; }
+  .sub { max-width:600px; font-size:24px; }
+  /* Motif: snapshots scored, then routed across four thresholds. */
+  .plot { position:absolute; right:100px; top:150px; width:250px; height:250px;
+          border-left:1px solid #B4B3AA; border-bottom:1px solid #B4B3AA; }
+  .bar { position:absolute; bottom:0; width:20px; background:#CFCEC7; }
+  .bar.hi { background:#1B2ED8; }
+  /* Threshold rules sit behind the bars; their labels hang outside the plot on the
+     left so nothing is ever obscured. */
+  .thr { position:absolute; left:0; right:0; height:1px; background:#16181C; opacity:.28; }
+  .thr span { position:absolute; right:100%; top:-7px; margin-right:10px;
+    font-family:'Martian Mono', ui-monospace, Menlo, monospace; font-size:10px;
+    letter-spacing:.1em; text-transform:uppercase; color:#5E626B; white-space:nowrap; }
+  .plotcap { position:absolute; right:100px; top:418px; width:250px; text-align:center; }
+</style></head><body>
+<span class="tick tl"></span><span class="tick tr"></span><span class="tick bl"></span><span class="tick br"></span>
+<div class="plot">
+  <span class="thr" style="bottom:190px"><span>archive</span></span>
+  <span class="thr" style="bottom:120px"><span>preserve</span></span>
+  <span class="thr" style="bottom:56px"><span>compress</span></span>
+  <span class="bar" style="left:14px;height:38px"></span>
+  <span class="bar" style="left:50px;height:96px"></span>
+  <span class="bar hi" style="left:86px;height:214px"></span>
+  <span class="bar" style="left:122px;height:62px"></span>
+  <span class="bar" style="left:158px;height:148px"></span>
+  <span class="bar" style="left:194px;height:22px"></span>
+  <span class="bar hi" style="left:230px;height:202px"></span>
+</div>
+<div class="plotcap figcap">Entropy score per snapshot</div>
+<div class="card">
+  <div class="eyebrow">Case study · PostgreSQL</div>
+  <div>
+    <div class="title">Entropy-Aware<br>Data Preservation</div>
+    <div class="rule"></div>
+    <div class="sub">In-database PL/pgSQL triggers score every snapshot, then decide what to keep.</div>
+  </div>
+  <div class="foot"><div class="byline"><span class="dot"></span>Sajid Islam</div>
+    <div class="domain">sajiddev.systems</div></div>
+</div></body></html>

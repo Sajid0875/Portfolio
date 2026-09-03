@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Writing — Sajid Islam</title>
+  <meta name="description" content="Technical write-ups by Sajid Islam on grounding LLM replies in retrieved data, designing human handoff for AI agents, and putting retention logic inside PostgreSQL." />
+  <meta name="author" content="Sajid Islam" />
+  <meta name="theme-color" content="#EDECE7" />
+  <!-- DRAFT INDEX: every article listed here is awaiting Sajid's review, so this page is
+       noindex too. To publish: flip this to "index, follow, max-image-preview:large,
+       max-snippet:-1", do the same on each approved article, add both to sitemap.xml,
+       and list them in llms.txt. See SEO-AEO-IMPLEMENTATION.md. -->
+  <meta name="robots" content="noindex, follow" />
+  <link rel="canonical" href="https://sajiddev.systems/writing/" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Sajid Islam" />
+  <meta property="og:url" content="https://sajiddev.systems/writing/" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:title" content="Writing — Sajid Islam" />
+  <meta property="og:description" content="Technical write-ups on grounding LLM replies, human handoff for AI agents, and in-database retention logic." />
+  <meta property="og:image" content="https://sajiddev.systems/assets/images/og-home.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Title card on pale grey drafting paper: the name Sajid Islam in heavy black type and a line drawing of concentric circles with a solid blue centre." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Writing — Sajid Islam" />
+  <meta name="twitter:description" content="Technical write-ups on grounding LLM replies, human handoff for AI agents, and in-database retention logic." />
+  <meta name="twitter:image" content="https://sajiddev.systems/assets/images/og-home.png" />
+  <meta name="twitter:image:alt" content="Title card on pale grey drafting paper: the name Sajid Islam in heavy black type and a line drawing of concentric circles with a solid blue centre." />
+
+  <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png" />
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://sajiddev.systems/writing/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://sajiddev.systems/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Writing"
+        }
+      ]
+    },
+    {
+      "@type": "CollectionPage",
+      "@id": "https://sajiddev.systems/writing/",
+      "url": "https://sajiddev.systems/writing/",
+      "name": "Writing \u2014 Sajid Islam",
+      "inLanguage": "en",
+      "description": "Technical write-ups on agentic AI grounding, human handoff, and in-database logic, drawn from Sajid Islam's own projects.",
+      "isPartOf": {
+        "@id": "https://sajiddev.systems/#website"
+      },
+      "breadcrumb": {
+        "@id": "https://sajiddev.systems/writing/#breadcrumb"
+      },
+      "about": {
+        "@id": "https://sajiddev.systems/#person"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://sajiddev.systems/#person",
+      "name": "Sajid Islam",
+      "url": "https://sajiddev.systems/"
+    }
+  ]
+}
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300&family=Martian+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+
+  <header class="nav scrolled" id="nav">
+    <a href="/" class="nav__brand"><span class="nav__brand-dot"></span> SYNAPSE</a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="/#about">Origin</a>
+      <a href="/#skills">Ecosystem</a>
+      <a href="/#projects">Memory</a>
+      <a href="/writing/">Writing</a>
+      <a href="/#contact" class="nav__cta">Open Channel</a>
+    </nav>
+  </header>
+
+  <main id="main" class="case">
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li aria-current="page">Writing</li>
+      </ol>
+    </nav>
+
+    <span class="case__tag">Notes from the work</span>
+    <h1>Writing</h1>
+
+    <p class="case__answer">Write-ups on things I actually built, not surveys of things I read
+      about. Each one traces a decision back to the code that implements it, and each says plainly
+      what it does not do. Right now all three are drafts awaiting review.</p>
+
+    <div class="draft-banner" role="note">
+      <p><strong>All three articles below are drafts.</strong> They are served with
+      <code>noindex</code>, kept out of <code>sitemap.xml</code> and <code>llms.txt</code>, and are
+      not yet reviewed and approved by Sajid Islam. They are published here so they can be read and
+      corrected, not because they are finished.</p>
+    </div>
+
+    <ol class="writing-list">
+
+      <li class="writing-item">
+        <p class="writing-item__meta"><span class="writing-item__status">Draft</span>
+          <time datetime="2026-09-03">3 September 2026</time> · Agentic AI · 8 min</p>
+        <h2><a href="/writing/catalogue-grounded-ai-replies-whatsapp-commerce/">Building
+          Catalogue-Grounded AI Replies for WhatsApp Commerce</a></h2>
+        <p>A language model that can name any product will eventually name one that does not exist.
+          How the copilot bounds that: retrieval decides, the model only phrases, and any product ID
+          outside the retrieved candidate set is rejected in code rather than discouraged in a
+          prompt.</p>
+        <p class="writing-item__rel">Builds on the
+          <a href="/projects/whatsapp-commerce-copilot/">WhatsApp Commerce Copilot</a>.</p>
+      </li>
+
+      <li class="writing-item">
+        <p class="writing-item__meta"><span class="writing-item__status">Draft</span>
+          <time datetime="2026-09-03">3 September 2026</time> · Agentic AI · 7 min</p>
+        <h2><a href="/writing/reliable-human-handoff-for-ai-agents/">Designing Reliable Human
+          Handoff for Customer-Service AI Agents</a></h2>
+        <p>Adding a "talk to a human" button is the easy half. Making the transfer survive a restart,
+          a second worker and two messages arriving at once is the half that decides whether a
+          customer ever gets two contradictory replies.</p>
+        <p class="writing-item__rel">Builds on the
+          <a href="/projects/whatsapp-commerce-copilot/">WhatsApp Commerce Copilot</a>.</p>
+      </li>
+
+      <li class="writing-item">
+        <p class="writing-item__meta"><span class="writing-item__status">Draft</span>
+          <time datetime="2026-09-03">3 September 2026</time> · Databases · 7 min</p>
+        <h2><a href="/writing/entropy-aware-data-preservation-postgresql-triggers/">Entropy-Aware
+          Data Preservation with PostgreSQL Triggers</a></h2>
+        <p>Retention logic that no client can skip, because no client performs it — plus a correction
+          I owe the project: the score it computes is a weighted change-density ratio, not Shannon
+          entropy, and there is no logarithm in it anywhere.</p>
+        <p class="writing-item__rel">Builds on the
+          <a href="/projects/entropy-aware-data-preservation/">Entropy-Aware Data Preservation
+          System</a>.</p>
+      </li>
+
+    </ol>
+
+    <div class="case__actions">
+      <a class="btn btn--ghost" href="/">Back to the homepage</a>
+      <a class="btn btn--ghost" href="/#projects">View selected projects</a>
+    </div>
+
+  </main>
+
+  <footer class="footer">
+    <p>© <span id="year">2026</span> Sajid Islam · <a href="/">sajiddev.systems</a></p>
+    <p class="footer__meta"><a href="/writing/">Writing</a> · <a href="/#projects">Projects</a></p>
+  </footer>
+
+</body>
+</html>

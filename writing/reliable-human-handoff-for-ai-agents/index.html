@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Designing Reliable Human Handoff for Customer-Service AI Agents</title>
+  <meta name="description" content="Handoff is a state machine, not a button. How the WhatsApp Commerce Copilot models AI-versus-human control in the database so the transfer survives restarts and concurrent messages." />
+  <meta name="author" content="Sajid Islam" />
+  <meta name="theme-color" content="#EDECE7" />
+  <!-- DRAFT: not for indexing until Sajid has reviewed and approved the text.
+       To publish: change this to "index, follow, max-image-preview:large, max-snippet:-1",
+       add the canonical URL to sitemap.xml, and list it in llms.txt. -->
+  <meta name="robots" content="noindex, follow" />
+  <link rel="canonical" href="https://sajiddev.systems/writing/reliable-human-handoff-for-ai-agents/" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Sajid Islam" />
+  <meta property="og:url" content="https://sajiddev.systems/writing/reliable-human-handoff-for-ai-agents/" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:title" content="Designing Reliable Human Handoff for Customer-Service AI Agents" />
+  <meta property="og:description" content="Handoff is a state machine, not a button. How the WhatsApp Commerce Copilot models AI-versus-human control in the database so the transfer survives restarts and concurrent messages." />
+  <meta property="og:image" content="https://sajiddev.systems/assets/images/og-whatsapp-commerce-copilot.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Case-study card for the WhatsApp Commerce Copilot showing its request path from customer to grounded reply." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Designing Reliable Human Handoff for Customer-Service AI Agents" />
+  <meta name="twitter:description" content="Handoff is a state machine, not a button. How the WhatsApp Commerce Copilot models AI-versus-human control in the database so the transfer survives restarts and concurrent messages." />
+  <meta name="twitter:image" content="https://sajiddev.systems/assets/images/og-whatsapp-commerce-copilot.png" />
+  <meta name="twitter:image:alt" content="Case-study card for the WhatsApp Commerce Copilot showing its request path from customer to grounded reply." />
+
+  <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png" />
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://sajiddev.systems/writing/reliable-human-handoff-for-ai-agents/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://sajiddev.systems/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Writing",
+          "item": "https://sajiddev.systems/writing/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Designing Reliable Human Handoff for Customer-Service AI Agents"
+        }
+      ]
+    },
+    {
+      "@type": "TechArticle",
+      "@id": "https://sajiddev.systems/writing/reliable-human-handoff-for-ai-agents/#article",
+      "headline": "Designing Reliable Human Handoff for Customer-Service AI Agents",
+      "description": "Handoff is a state machine, not a button. How the WhatsApp Commerce Copilot models AI-versus-human control in the database so the transfer survives restarts and concurrent messages.",
+      "url": "https://sajiddev.systems/writing/reliable-human-handoff-for-ai-agents/",
+      "inLanguage": "en",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://sajiddev.systems/writing/reliable-human-handoff-for-ai-agents/"
+      },
+      "author": {
+        "@id": "https://sajiddev.systems/#person"
+      },
+      "publisher": {
+        "@id": "https://sajiddev.systems/#person"
+      },
+      "isPartOf": {
+        "@id": "https://sajiddev.systems/#website"
+      },
+      "creativeWorkStatus": "Draft"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://sajiddev.systems/writing/reliable-human-handoff-for-ai-agents/",
+      "url": "https://sajiddev.systems/writing/reliable-human-handoff-for-ai-agents/",
+      "name": "Designing Reliable Human Handoff for Customer-Service AI Agents",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@id": "https://sajiddev.systems/#website"
+      },
+      "breadcrumb": {
+        "@id": "https://sajiddev.systems/writing/reliable-human-handoff-for-ai-agents/#breadcrumb"
+      },
+      "primaryImageOfPage": null
+    },
+    {
+      "@type": "Person",
+      "@id": "https://sajiddev.systems/#person",
+      "name": "Sajid Islam",
+      "url": "https://sajiddev.systems/"
+    }
+  ]
+}
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300&family=Martian+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+
+  <header class="nav scrolled" id="nav">
+    <a href="/" class="nav__brand"><span class="nav__brand-dot"></span> SYNAPSE</a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="/#about">Origin</a>
+      <a href="/#skills">Ecosystem</a>
+      <a href="/#projects">Memory</a>
+      <a href="/writing/">Writing</a>
+      <a href="/#contact" class="nav__cta">Open Channel</a>
+    </nav>
+  </header>
+
+  <main id="main" class="case">
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li><a href="/writing/">Writing</a></li>
+        <li aria-current="page">Reliable Human Handoff for Customer-Service AI Agents</li>
+      </ol>
+    </nav>
+
+    <div class="draft-banner" role="note">
+      <p><strong>Draft — awaiting review.</strong> This article is written from the source
+      repository and has not yet been reviewed and approved by Sajid Islam. It is served with
+      <code>noindex</code> so search engines do not list it, and it is deliberately absent from
+      <code>sitemap.xml</code> and <code>llms.txt</code>. Everything below describes code that
+      exists in the linked repository; anything not yet built is labelled
+      <em>proposed</em>.</p>
+    </div>
+
+    <h1>Designing Reliable Human Handoff for Customer-Service AI Agents</h1>
+
+    <p class="case__meta"><span>Draft written <time datetime="2026-09-03">3 September 2026</time></span>
+      <span>Est. 7 min read</span></p>
+
+    <p class="case__answer">The short answer: handoff is a piece of persistent state, not a button.
+      In the WhatsApp Commerce Copilot, whether the AI or a human owns a conversation is a column on
+      the conversation row — <code>is_ai_controlled</code> — and every inbound message reads it before
+      anything else happens. Because the flag lives in the database rather than in process memory, a
+      restart, a second worker, or two messages arriving at once cannot resurrect a bot that a shop
+      owner has just switched off.</p>
+
+    <section>
+      <h2>The problem: the bot is confidently unhelpful and a person is watching</h2>
+      <p>Every customer-service agent eventually meets a conversation it should not be handling —
+        an angry customer, a bespoke request, a question the catalogue cannot answer. The failure
+        that matters is not the agent being wrong. It is the agent being wrong <em>while a human is
+        trying to take over</em>, so the customer receives two contradictory replies and stops
+        trusting either.</p>
+      <p>This is why "add a handoff button" is the easy half of the problem. The hard half is making
+        the transfer atomic and durable.</p>
+    </section>
+
+    <section>
+      <h2>The approach: control is a column, not a runtime variable</h2>
+      <p>The copilot models the conversation itself as the unit of control. The
+        <code>conversations</code> table carries <code>is_ai_controlled</code> alongside the
+        conversation's status, its current product and variant, and a serialised context blob.
+        Ownership is therefore a fact about the conversation that any process can read, not a value
+        held in whichever worker happened to handle the last message.</p>
+      <p>That single decision buys several properties for free:</p>
+      <ul>
+        <li>A backend restart does not re-enable the AI on a conversation a human took over.</li>
+        <li>Two messages arriving concurrently read the same flag, so they cannot disagree.</li>
+        <li>The dashboard and the message pipeline share one source of truth rather than syncing.</li>
+        <li>The state is inspectable — you can query which conversations a human currently owns.</li>
+      </ul>
+      <p>In the dashboard, this surfaces as Human Mode: a one-click toggle that disables the AI so
+        the owner can reply personally, and one click back when they are done.</p>
+    </section>
+
+    <section>
+      <h2>Recording why, not just that</h2>
+      <p>A separate <code>human_handoffs</code> table records each transfer with its
+        <code>conversation_id</code>, <code>store_id</code>, a <code>reason</code>, a
+        <code>summary</code> and a <code>status</code>. Two things follow from keeping this
+        separate from the boolean.</p>
+      <p>First, the reason is preserved. A toggle tells you the AI is off; a handoff row tells you it
+        went off because confidence was low on a returns question — which is the input you need to
+        decide what to fix.</p>
+      <p>Second, the summary means the human does not start cold. They inherit the conversation with
+        context attached rather than scrolling to reconstruct it.</p>
+      <p>Handoff is triggered from two directions: the owner takes control from the dashboard, or the
+        system escalates when confidence is low. The escalation path is the interesting one, because
+        it means the agent has to know what it does not know.</p>
+    </section>
+
+    <section>
+      <h2>Tradeoffs</h2>
+      <ul>
+        <li><strong>A read on every message.</strong> Checking the flag per inbound message costs a
+          query. That is the price of correctness under concurrency, and at this scale it is
+          immaterial — but it is a real cost, not a free lunch.</li>
+        <li><strong>Escalation thresholds are heuristic.</strong> Confidence here is produced by
+          rule-based matching, not a calibrated probability. It works, and it is honest to say it is
+          tuned by judgement rather than measured.</li>
+        <li><strong>Someone has to be there.</strong> Handing off to a human who is asleep is worse
+          than a mediocre automated answer, because the customer now waits with no reply at all. A
+          handoff design is incomplete without an answer to "and if nobody picks up?"</li>
+        <li><strong>Two tables instead of one.</strong> The boolean alone would have shipped faster.
+          The audit trail is what makes the behaviour improvable.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Limitations</h2>
+      <ul>
+        <li>There is no timeout or escalation ladder: a conversation stays in Human Mode until
+          someone toggles it back. Nothing chases an unattended handoff.</li>
+        <li>The dashboard has no real authentication in this MVP, so "which human took over" is not
+          attributable to an individual account.</li>
+        <li>No measurement exists of how often escalation fires, or how often it should have.</li>
+        <li><em>Proposed, not built:</em> a timeout that returns an unattended conversation to the AI
+          with an apology message, per-agent attribution once authentication exists, and calibrating
+          the confidence threshold against labelled conversations rather than judgement.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>What I would take to the next system</h2>
+      <p>Put the control flag where the data is. Almost every subtle bug in an AI agent that shares
+        work with humans comes from ownership being tracked in one place and acted on in another —
+        cached in a worker, held in a session, assumed from the last event. Making it a column turned
+        a class of race conditions into a non-issue, and it cost one migration.</p>
+    </section>
+
+    <section>
+      <h2>Related reading</h2>
+      <ul>
+        <li><a href="/writing/catalogue-grounded-ai-replies-whatsapp-commerce/">Building
+          catalogue-grounded AI replies for WhatsApp commerce</a> — how the agent decides what to say
+          before it decides whether to say it.</li>
+        <li><a href="/projects/whatsapp-commerce-copilot/">The full case study</a> — the system this
+          handoff design sits inside.</li>
+        <li><a href="https://github.com/Comebck-Pakistan/cohort-1-squad-margalla/tree/main/whatsapp-commerce-copilot" target="_blank" rel="noopener">Source code on GitHub</a> — see
+          <code>backend/app/services/conversation_controller.py</code>.</li>
+      </ul>
+    </section>
+
+    <div class="case__actions">
+      <a class="btn btn--ghost" href="/writing/">All writing</a>
+      <a class="btn btn--ghost" href="/#projects">Projects</a>
+    </div>
+
+  </main>
+
+  <footer class="footer">
+    <p>© <span id="year">2026</span> Sajid Islam · <a href="/">sajiddev.systems</a></p>
+    <p class="footer__meta"><a href="/writing/">Writing</a> · <a href="/#projects">Projects</a></p>
+  </footer>
+
+</body>
+</html>

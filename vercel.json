@@ -1,7 +1,30 @@
 {
+  "trailingSlash": true,
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.sajiddev.systems"
+        }
+      ],
+      "destination": "https://sajiddev.systems/:path*",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/backup-dark-theme/:path*",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/assets/og-src/:path*",
       "headers": [
         {
           "key": "X-Robots-Tag",
